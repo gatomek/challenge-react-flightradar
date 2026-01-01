@@ -29,7 +29,10 @@ export function AppToolbar() {
         setAnchorElUser(event.currentTarget);
     };
     const handleCloseNavMenu = (view: string): void => {
-        setView(view);
+        if (view !== null) {
+            setView(view);
+        }
+
         setAnchorElNav(null);
     };
 
@@ -84,7 +87,7 @@ export function AppToolbar() {
                                 horizontal: 'left',
                             }}
                             open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
+                            onClose={() => handleCloseNavMenu(null)}
                             sx={{display: {xs: 'block', md: 'none'}}}
                         >
                             {pages.map((page) => (
