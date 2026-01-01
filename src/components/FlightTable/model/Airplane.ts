@@ -7,5 +7,4 @@ export type Airplane = {
     longitude: number;
     altitude: number;
     heading?: number;
-
 }

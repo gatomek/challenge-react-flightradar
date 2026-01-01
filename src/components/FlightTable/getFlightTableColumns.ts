@@ -1,7 +1,7 @@
 import type {MRT_ColumnDef} from "material-react-table";
 import type {Airplane} from "./model/Airplane.ts";
 
-export function getFlightTableRows(): MRT_ColumnDef<Airplane>[] {
+export function getFlightTableColumns(): MRT_ColumnDef<Airplane>[] {
     return [
         {
             accessorKey: 'hex',
