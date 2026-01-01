@@ -1,6 +1,7 @@
 import './App.css'
 import Box from '@mui/material/Box';
 import {AppToolbar} from "./components/AppToolbar.tsx";
+import {FlightTable} from "./components/FlightTable/FlightTable.tsx";
 
 
 function App() {
@@ -28,16 +29,16 @@ function App() {
             >
                 <Box
                     sx={{
-                        width: '25%',
+                        width: '50%',
                         height: '100%',
                         border: 'solid 1px lightgray'
                     }}
                 >
-
+                    <FlightTable/>
                 </Box>
                 <Box
                     sx={{
-                        width: '75%',
+                        width: '50%',
                         height: '100%',
                         border: 'solid 1px lightgray'
                     }}
