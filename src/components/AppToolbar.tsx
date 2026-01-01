@@ -28,7 +28,7 @@ export function AppToolbar() {
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
-    const handleCloseNavMenu = (view: string): void => {
+    const handleCloseNavMenu = (view: null | string): void => {
         if (view !== null) {
             setView(view);
         }
