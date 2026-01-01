@@ -5,7 +5,6 @@
 * @mui/icons-material
 * material-react-table
 * @mui/x-date-pickers
-* @mui/icons-material
 
 # ADS-B Links
 * https://airplanes.live/rest-api-adsb-data-field-descriptions/

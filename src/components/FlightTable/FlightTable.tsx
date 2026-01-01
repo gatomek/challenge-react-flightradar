@@ -1,32 +1,13 @@
 import {useMemo} from "react";
 import {MaterialReactTable, type MRT_ColumnDef, useMaterialReactTable,} from 'material-react-table';
 import {getFlightTableRows} from "./getFlightTableRows.ts";
+import type {Airplane} from "./model/Airplane.ts";
+import {getFlightData} from "./getFlightData.ts";
 
-type Airplane = {
-    hex?: string;
-    flight?: string;
-    type?: string;
-    desc?: string;
-    latitude?: string;
-    longitude?: string;
-    heading?: string;
-    altitude?: string;
-}
-
-const data: Airplane[] = [
-    {
-        hex: "4baa90",
-        flight: "THY6YX",
-        type: "A321",
-        desc: "AIRBUS A-321",
-        latitude: "51.302719",
-        longitude: "18.760269",
-        heading: "152.12",
-        altitude: "35050"
-    }
-]
 
 export function FlightTable() {
+
+    const data = useMemo<Airplane[]>(() => getFlightData(), []);
 
     const columns = useMemo<MRT_ColumnDef<Airplane>[]>(
         () => getFlightTableRows(), []
@@ -34,7 +15,10 @@ export function FlightTable() {
 
     const table = useMaterialReactTable({
             columns,
-            data
+            data,
+            enableDensityToggle: false,
+            initialState: {density: 'compact'},
+            enableRowNumbers: true
         }
     );
 
