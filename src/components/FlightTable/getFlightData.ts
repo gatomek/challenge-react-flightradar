@@ -6,10 +6,10 @@ const flights: Airplane[] = [
         flight: "THY6YX",
         type: "A321",
         desc: "AIRBUS A-321",
-        latitude: "51.302719",
-        longitude: "18.760269",
-        heading: "152.12",
-        altitude: "35050"
+        latitude: 51.302719,
+        longitude: 18.760269,
+        altitude: 35050,
+        heading: 152.12
     }
 ]
 

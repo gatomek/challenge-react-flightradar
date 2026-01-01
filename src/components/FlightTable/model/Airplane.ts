@@ -3,9 +3,9 @@ export type Airplane = {
     flight?: string;
     type: string;
     desc?: string;
-    latitude: string;
-    longitude: string;
-    altitude: string;
-    heading?: string;
+    latitude: number;
+    longitude: number;
+    altitude: number;
+    heading?: number;
 
 }
