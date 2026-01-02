@@ -23,7 +23,7 @@ function App() {
                 <Box margin={0} padding={0} mt={'70px'} maxWidth="xxl"
                      sx={{
                          width: '100%',
-                         height: 'calc(100vh - 70px)',
+                         height: 'calc(100vh - 72px)',
                          display: 'flex',
                          justifyContent: 'center',
                          alignItems: 'center',
