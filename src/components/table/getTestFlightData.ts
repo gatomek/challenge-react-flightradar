@@ -1,6 +1,6 @@
 import type {Airplane} from "./model/Airplane.ts";
-import type {AircraftData} from "../Query/model/AircraftData.ts";
-import type {Aircraft} from "../Query/model/Aircraft.ts";
+import type {AircraftData} from "../query/model/AircraftData.ts";
+import type {Aircraft} from "../query/model/Aircraft.ts";
 
 const flights: Airplane[] = [
     {

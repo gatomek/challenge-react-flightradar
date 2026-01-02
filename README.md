@@ -17,6 +17,7 @@
 
 # Interesting resources
 * https://en.wikipedia.org/wiki/List_of_aviation,_avionics,_aerospace_and_aeronautical_abbreviations
+* https://blog.katowice-airport.com/identyfikacja-samolotow-2014-07/
 
 # Project preparation
 ```
@@ -28,4 +29,9 @@ npm install object-hash
 npm install -D @types/object-hash
 npm install leaflet-rotate
 npm install -D @types/leaflet-rotate
+```
+
+# GIT Configuration
+```
+git config core.ignorecase false
 ```

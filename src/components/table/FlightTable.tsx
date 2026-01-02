@@ -4,7 +4,7 @@ import {getFlightTableColumns} from "./getFlightTableColumns.ts";
 import type {Airplane} from "./model/Airplane.ts";
 import {getFlightData} from "./getTestFlightData.ts";
 import {useQuery} from "@tanstack/react-query";
-import type {AircraftData} from "../Query/model/AircraftData.ts";
+import type {AircraftData} from "../query/model/AircraftData.ts";
 
 export function FlightTable() {
 
