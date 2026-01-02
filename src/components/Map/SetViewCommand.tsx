@@ -2,7 +2,7 @@ import {useMap} from "react-leaflet";
 import {useEffect} from "react";
 
 export type SetViewProps = {
-    marker: number[];
+    marker: [number,number,number?];
 }
 
 export function SetViewCommand(props: Readonly<SetViewProps>): null {
