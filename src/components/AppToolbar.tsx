@@ -42,7 +42,7 @@ export function AppToolbar() {
 
     return (
         <AppBar position="fixed" sx={{height: '70px'}}>
-            <Container disableGutters={true} maxWidth={false}>
+            <Container disableGutters maxWidth={false}>
                 <Toolbar>
                     <FlightTakeoffIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/>
                     <Typography
