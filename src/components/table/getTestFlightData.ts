@@ -26,16 +26,18 @@ export function makeFlightData(data: undefined | AircraftData): Airplane[] {
     if (!data)
         return [];
 
-    return data.ac.map((ac: Aircraft) => ({
-        hex: ac.hex,
-        type: ac.t,
-        desc: ac.desc,
-        registration: ac.r,
-        flight: ac.flight,
-        latitude: ac.lat,
-        longitude: ac.lon,
-        altitude: ac.alt_baro,
-        military: !!(ac.dbFlags && (ac.dbFlags & 1) === 1)
-    }));
+    return data.ac
+        .toSorted((a: Aircraft, b: Aircraft) => a.hex.localeCompare(b.hex))
+        .map((ac: Aircraft) => ({
+            hex: ac.hex,
+            type: ac.t,
+            desc: ac.desc,
+            registration: ac.r,
+            flight: ac.flight,
+            latitude: ac.lat,
+            longitude: ac.lon,
+            altitude: ac.alt_baro,
+            military: !!(ac.dbFlags && (ac.dbFlags & 1) === 1)
+        }));
 }
 

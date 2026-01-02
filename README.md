@@ -35,3 +35,8 @@ npm install -D @types/leaflet-rotate
 ```
 git config core.ignorecase false
 ```
+
+# TSC version
+```
+npx tsc --version
+```
