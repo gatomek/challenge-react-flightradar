@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import {AppToolbar} from "./components/AppToolbar.tsx";
 import {FlightTable} from "./components/FlightTable/FlightTable.tsx";
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
+import {FlightMap} from "./components/Map/FlightMap.tsx";
 
 const queryClient = new QueryClient();
 
@@ -43,10 +44,11 @@ function App() {
                         sx={{
                             width: '50%',
                             height: '100%',
-                            border: 'solid 1px lightgray'
+                            border: 'solid 1px lightgray',
+                            overflow: "hidden"
                         }}
                     >
-
+                        <FlightMap/>
                     </Box>
                 </Box>
             </Box>
