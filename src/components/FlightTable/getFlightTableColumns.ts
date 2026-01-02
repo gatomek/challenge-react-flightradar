@@ -19,24 +19,24 @@ export function getFlightTableColumns(): MRT_ColumnDef<Airplane>[] {
             size: 50,
         },
         {
+            accessorKey: 'registration',
+            header: 'Register',
+            size: 50,
+        },
+        {
             accessorKey: 'desc',
             header: 'Desc',
-            size: 50,
-        },
-        {
-            accessorKey: 'latitude',
-            header: 'Latitude',
-            size: 50,
-        },
-        {
-            accessorKey: 'longitude',
-            header: 'Longitude',
             size: 50,
         },
         {
             accessorKey: 'altitude',
             header: 'Altitude',
             size: 50,
-        }
+        },
+        {
+            accessorFn: (row: Airplane) => row.military ? "!" : "",
+            header: 'Military',
+            size: 30,
+        },
     ]
 }

@@ -11,7 +11,9 @@ const flights: Airplane[] = [
         latitude: 51.302719,
         longitude: 18.760269,
         altitude: 35050,
-        heading: 152.12
+        heading: 152.12,
+        registration: 'LX-N90453',
+        military: false
     }
 ]
 
@@ -19,19 +21,21 @@ export function getTestFlightData() {
     return flights;
 }
 
-export function getFlightData(data: undefined | AircraftData): Airplane[]  {
+export function getFlightData(data: undefined | AircraftData): Airplane[] {
 
-    if( !data)
+    if (!data)
         return [];
 
-    return data.ac.map( (ac:Aircraft) => ({
+    return data.ac.map((ac: Aircraft) => ({
         hex: ac.hex,
         type: ac.t,
         desc: ac.desc,
+        registration: ac.r,
         flight: ac.flight,
         latitude: ac.lat,
         longitude: ac.lon,
-        altitude: ac.alt_baro
+        altitude: ac.alt_baro,
+        military: !!(ac.dbFlags && (ac.dbFlags & 1) === 1)
     }));
 }
 
