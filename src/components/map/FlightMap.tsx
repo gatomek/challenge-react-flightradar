@@ -1,11 +1,33 @@
-import {MapContainer, TileLayer} from "react-leaflet";
-import type {LatLngTuple} from "leaflet";
 import type {CustomTileLayer} from "./CustomTileLayer.ts";
 import {stadiaMapsTileLayer} from "./tileLayers.ts";
 import {useState} from "react";
+import {useLiveAirplanesApi} from "../hooks/useLiveAirplanesApi.ts";
+import hash from 'object-hash';
+import type {Feature, FeatureCollection} from 'geojson';
+import L, {LatLng, type LatLngTuple, Layer} from "leaflet";
+import {GeoJSON, MapContainer, Marker, TileLayer} from 'react-leaflet'
+import {makeAircraftCollection} from "./makeAircraftCollection.ts";
 
 const DEFAULT_POSITION: [number, number] = [20.142209, 51.961301]
 const position: LatLngTuple = [DEFAULT_POSITION[1], DEFAULT_POSITION[0]];
+const radarPosition: LatLngTuple = [51, 21];
+
+type ShowGeoJsonObjectProps = {
+    geoJsonCollection: FeatureCollection,
+    pointToLayer: ((geoJsonPoint: Feature, latLng: LatLng) => Layer) | undefined,
+    style?: Record<string, string | number>;
+}
+
+function ShowGeoJsonObject(props: Readonly<ShowGeoJsonObjectProps>) {
+    return (
+        <GeoJSON
+            key={hash(props.geoJsonCollection)}
+            data={props.geoJsonCollection}
+            style={props.style}
+            pointToLayer={props.pointToLayer}
+        />
+    );
+}
 
 function SetTileLayer(props: Readonly<CustomTileLayer>) {
     return (
@@ -17,8 +39,21 @@ function SetTileLayer(props: Readonly<CustomTileLayer>) {
     );
 }
 
+const aircraftStyle: Record<string, string | number> = {
+    color: "blue",
+    weight: 1,
+    radius: 5,
+};
+
+function aircraftPointToLayer(feature: Feature, latLng: LatLng) {
+    return L.circleMarker(latLng)
+        .bindTooltip(feature.properties?.desc, {permanent: false, direction: 'top', opacity: 0.75});
+}
+
 export function FlightMap() {
     const [tileLayer] = useState<CustomTileLayer>(stadiaMapsTileLayer);
+    const {data} = useLiveAirplanesApi();
+    const aircraftCollection: FeatureCollection = makeAircraftCollection(data);
 
     return (
         <MapContainer
@@ -28,6 +63,10 @@ export function FlightMap() {
             scrollWheelZoom={true}
         >
             <SetTileLayer url={tileLayer.url} attribution={tileLayer.attribution}/>
+            <ShowGeoJsonObject geoJsonCollection={aircraftCollection}
+                               pointToLayer={aircraftPointToLayer}
+                               style={aircraftStyle}/>
+            <Marker position={radarPosition}/>
         </MapContainer>
     )
 }
