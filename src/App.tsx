@@ -1,9 +1,9 @@
 import './App.css'
 import Box from '@mui/material/Box';
 import {AppToolbar} from "./components/AppToolbar.tsx";
-import {FlightTable} from "./components/FlightTable/FlightTable.tsx";
+import {FlightTable} from "./components/table/FlightTable.tsx";
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
-import {FlightMap} from "./components/Map/FlightMap.tsx";
+import {FlightMap} from "./components/map/FlightMap.tsx";
 
 const queryClient = new QueryClient();
 

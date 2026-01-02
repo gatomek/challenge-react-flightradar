@@ -1,0 +1,27 @@
+import {useMemo} from "react";
+import {MaterialReactTable, type MRT_ColumnDef, useMaterialReactTable,} from 'material-react-table';
+import {getFlightTableColumns} from "./getFlightTableColumns.ts";
+import type {Airplane} from "./model/Airplane.ts";
+import {makeFlightData} from "./getTestFlightData.ts";
+import {useLiveAirplanesApi} from "../hooks/useLiveAirplanesApi.ts";
+
+export function FlightTable() {
+    const {data} = useLiveAirplanesApi();
+    const flightData = useMemo<Airplane[]>(() => makeFlightData(data), [data]);
+    const columns = useMemo<MRT_ColumnDef<Airplane>[]>(
+        () => getFlightTableColumns(), []
+    );
+
+    const table = useMaterialReactTable({
+            columns,
+            data: flightData,
+            enableDensityToggle: false,
+            initialState: {density: 'compact'},
+            enableRowNumbers: true
+        }
+    );
+
+    return (
+        <MaterialReactTable table={table}/>
+    )
+}
