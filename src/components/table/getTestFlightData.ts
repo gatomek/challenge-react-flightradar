@@ -21,7 +21,7 @@ export function getTestFlightData() {
     return flights;
 }
 
-export function getFlightData(data: undefined | AircraftData): Airplane[] {
+export function makeFlightData(data: undefined | AircraftData): Airplane[] {
 
     if (!data)
         return [];
