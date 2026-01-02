@@ -5,10 +5,11 @@ import {useLiveAirplanesApi} from "../hooks/useLiveAirplanesApi.ts";
 import hash from 'object-hash';
 import type {Feature, FeatureCollection, MultiPoint} from 'geojson';
 import L, {LatLng, type LatLngTuple, Layer} from "leaflet";
-import {GeoJSON, MapContainer, TileLayer} from 'react-leaflet'
+import {GeoJSON, MapContainer, Marker, TileLayer} from 'react-leaflet'
 
 const DEFAULT_POSITION: [number, number] = [20.142209, 51.961301]
 const position: LatLngTuple = [DEFAULT_POSITION[1], DEFAULT_POSITION[0]];
+const radarPosition: LatLngTuple = [51, 21];
 
 type ShowGeoJsonObjectProps = {
     geoJsonCollection: FeatureCollection,
@@ -88,6 +89,7 @@ export function FlightMap() {
             <ShowGeoJsonObject geoJsonCollection={aircraftCollection}
                                pointToLayer={aircraftPointToLayer}
                                style={aircraftStyle}/>
+            <Marker position={radarPosition}/>
         </MapContainer>
     )
 }
