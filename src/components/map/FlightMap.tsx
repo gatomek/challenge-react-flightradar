@@ -44,7 +44,7 @@ const aircraftStyle: Record<string, string | number> = {
 
 function aircraftPointToLayer(feature: Feature, latLng: LatLng) {
     const color = feature.properties?.type === 'TWR' ? 'brown' : 'blue';
-    return L.circleMarker(latLng).setStyle( {color: color} )
+    return L.circleMarker(latLng).setStyle({color: color})
         .bindTooltip(feature.properties?.desc, {permanent: false, direction: 'top', opacity: 0.75});
 }
 
