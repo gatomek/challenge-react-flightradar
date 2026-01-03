@@ -12,15 +12,14 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
+import RadarIcon from '@mui/icons-material/Radar';
 
-const pages = ['Radar', 'About'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Radar', 'Settings'];
+const settings = ['Profile', 'Logout'];
 
 export function AppToolbar() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-    const [view, setView] = useState<null | string>(null);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -28,11 +27,7 @@ export function AppToolbar() {
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
-    const handleCloseNavMenu = (view: null | string): void => {
-        if (view !== null) {
-            setView(view);
-        }
-
+    const handleCloseNavMenu = (): void => {
         setAnchorElNav(null);
     };
 
@@ -44,12 +39,10 @@ export function AppToolbar() {
         <AppBar position="fixed" sx={{height: '70px'}}>
             <Container disableGutters maxWidth={false}>
                 <Toolbar>
-                    <FlightTakeoffIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/>
+                    <RadarIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/>
                     <Typography
                         variant="h6"
                         noWrap
-                        component="a"
-                        href="#app-bar-with-responsive-menu"
                         sx={{
                             mr: 2,
                             display: {xs: 'none', md: 'flex'},
@@ -87,24 +80,22 @@ export function AppToolbar() {
                                 horizontal: 'left',
                             }}
                             open={Boolean(anchorElNav)}
-                            onClose={() => handleCloseNavMenu(null)}
+                            onClose={handleCloseNavMenu}
                             sx={{display: {xs: 'block', md: 'none'}}}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
+                                <MenuItem key={page} onClick={handleCloseNavMenu}>
                                     <Typography sx={{textAlign: 'center'}}>{page}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
                     </Box>
 
-                    <FlightTakeoffIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>
+                    <RadarIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>
 
                     <Typography
                         variant="h6"
                         noWrap
-                        component="a"
-                        href="#app-bar-with-responsive-menu"
                         sx={{
                             mr: 1,
                             display: {xs: 'flex', md: 'none'},
@@ -122,7 +113,7 @@ export function AppToolbar() {
                         {pages.map((page) => (
                             <Button
                                 key={page}
-                                onClick={() => handleCloseNavMenu(page)}
+                                onClick={handleCloseNavMenu}
                                 sx={{my: 2, color: 'white', display: 'block'}}
                             >
                                 {page}

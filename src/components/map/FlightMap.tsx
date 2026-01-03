@@ -8,9 +8,7 @@ import L, {LatLng, type LatLngTuple, Layer} from "leaflet";
 import {GeoJSON, MapContainer, Marker, TileLayer} from 'react-leaflet'
 import {makeAircraftCollection} from "./makeAircraftCollection.ts";
 
-const DEFAULT_POSITION: [number, number] = [20.142209, 51.961301]
-const position: LatLngTuple = [DEFAULT_POSITION[1], DEFAULT_POSITION[0]];
-const radarPosition: LatLngTuple = [51, 21];
+const DEFAULT_POSITION: LatLngTuple = [52.162, 20.96];
 
 type ShowGeoJsonObjectProps = {
     geoJsonCollection: FeatureCollection,
@@ -29,7 +27,7 @@ function ShowGeoJsonObject(props: Readonly<ShowGeoJsonObjectProps>) {
     );
 }
 
-function SetTileLayer(props: Readonly<CustomTileLayer>) {
+function TileLayerSetter(props: Readonly<CustomTileLayer>) {
     return (
         <TileLayer
             url={props.url}
@@ -40,13 +38,13 @@ function SetTileLayer(props: Readonly<CustomTileLayer>) {
 }
 
 const aircraftStyle: Record<string, string | number> = {
-    color: "blue",
     weight: 1,
     radius: 5,
 };
 
 function aircraftPointToLayer(feature: Feature, latLng: LatLng) {
-    return L.circleMarker(latLng)
+    const color = feature.properties?.type === 'TWR' ? 'brown' : 'blue';
+    return L.circleMarker(latLng).setStyle({color: color})
         .bindTooltip(feature.properties?.desc, {permanent: false, direction: 'top', opacity: 0.75});
 }
 
@@ -58,15 +56,15 @@ export function FlightMap() {
     return (
         <MapContainer
             style={{height: "100%", width: "100%"}}
-            center={position}
+            center={DEFAULT_POSITION}
             zoom={9}
             scrollWheelZoom={true}
         >
-            <SetTileLayer url={tileLayer.url} attribution={tileLayer.attribution}/>
+            <TileLayerSetter url={tileLayer.url} attribution={tileLayer.attribution}/>
             <ShowGeoJsonObject geoJsonCollection={aircraftCollection}
                                pointToLayer={aircraftPointToLayer}
                                style={aircraftStyle}/>
-            <Marker position={radarPosition}/>
+            <Marker position={DEFAULT_POSITION}/>
         </MapContainer>
     )
 }
