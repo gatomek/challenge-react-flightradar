@@ -6,7 +6,7 @@ export type Aircraft = {
     desc?: string;
     lat: number;
     lon: number;
-    alt_baro: number;
+    alt_baro: number | string;
     heading?: number;
     dbFlags?: number;
 };

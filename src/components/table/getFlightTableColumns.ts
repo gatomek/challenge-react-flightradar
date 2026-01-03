@@ -14,13 +14,13 @@ export function getFlightTableColumns(): MRT_ColumnDef<Airplane>[] {
             size: 50,
         },
         {
-            accessorKey: 'type',
-            header: 'Type',
+            accessorKey: 'registration',
+            header: 'Register',
             size: 50,
         },
         {
-            accessorKey: 'registration',
-            header: 'Register',
+            accessorKey: 'type',
+            header: 'Type',
             size: 50,
         },
         {
@@ -34,8 +34,8 @@ export function getFlightTableColumns(): MRT_ColumnDef<Airplane>[] {
             size: 50,
         },
         {
-            accessorFn: (row: Airplane) => row.military ? "!" : "",
-            header: 'Military',
+            accessorFn: (row: Airplane) : "MIL" | undefined => row.military ? "MIL" : undefined,
+            header: 'Info',
             size: 30,
         },
     ]
