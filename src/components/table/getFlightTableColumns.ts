@@ -34,7 +34,7 @@ export function getFlightTableColumns(): MRT_ColumnDef<Airplane>[] {
             size: 50,
         },
         {
-            accessorFn: (row: Airplane) : "MIL" | undefined => row.military ? "MIL" : undefined,
+            accessorFn: (row: Airplane): "MIL" | undefined => row.military ? "MIL" : undefined,
             header: 'Info',
             size: 30,
         },
