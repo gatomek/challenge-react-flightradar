@@ -17,7 +17,12 @@ export function FlightTable() {
             data: flightData,
             enableDensityToggle: false,
             initialState: {density: 'compact'},
-            enableRowNumbers: true
+            enableRowNumbers: true,
+            enableBottomToolbar: false,
+            enableGlobalFilterModes: true,
+            enablePagination: false,
+            enableRowVirtualization: true,
+            muiTableContainerProps: {sx: {maxHeight: '500px'}},
         }
     );
 

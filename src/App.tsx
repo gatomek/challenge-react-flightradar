@@ -27,18 +27,34 @@ function App() {
                          height: 'calc(100vh - 72px)',
                          display: 'flex',
                          justifyContent: 'center',
-                         alignItems: 'center',
-                         border: 'solid 1px lightgray'
+                         alignItems: 'center'
                      }}
                 >
                     <Box
                         sx={{
                             width: '50%',
-                            height: '100%',
-                            border: 'solid 1px lightgray'
+                            height: '100%'
                         }}
                     >
-                        <FlightTable/>
+                        <Box
+                            sx={{
+                                width: '100%',
+                                height: '560px'
+                            }}
+                        >
+                            <FlightTable/>
+                        </Box>
+                        <Box
+                            sx={{
+                                width: '100%',
+                                height: 'calc(100% - 556px - 4px)',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}
+                        >
+                            Info
+                        </Box>
                     </Box>
                     <Box
                         sx={{
