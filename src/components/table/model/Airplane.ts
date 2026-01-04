@@ -6,7 +6,7 @@ export type Airplane = {
     desc?: string;
     latitude: number;
     longitude: number;
-    altitude: number;
+    altitude: number | string;
     heading?: number;
     military: boolean;
 }
