@@ -22,7 +22,7 @@ export function FlightTable() {
             enableGlobalFilterModes: true,
             enablePagination: false,
             enableRowVirtualization: true,
-            muiTableContainerProps: {sx: {maxHeight: '500px'}},
+            muiTableContainerProps: {sx: {height: '500px'}},
         }
     );
 
