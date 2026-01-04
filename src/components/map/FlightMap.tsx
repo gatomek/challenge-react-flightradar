@@ -1,6 +1,6 @@
 import type {CustomTileLayer} from "./CustomTileLayer.ts";
 import {stadiaMapsTileLayer} from "./tileLayers.ts";
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import {useLiveAirplanesApi} from "../../hooks/useLiveAirplanesApi.ts";
 import hash from 'object-hash';
 import type {Feature, FeatureCollection} from 'geojson';
@@ -59,22 +59,22 @@ export function FlightMap() {
     const aircraftCollection: FeatureCollection = makeAircraftCollection(data);
     const dispatch = useAppDispatch();
 
-    const onMapClickHandler = () => {
-        dispatch(resetIcao());
-    }
+    const onMapClickHandler
+        = useCallback(() => dispatch(resetIcao()), [dispatch]);
 
-    const onMarkerClickHandler = (evt: LeafletMouseEvent, feature: Feature): void => {
-        dispatch(setIcao(feature.properties?.icao));
-        L.DomEvent.stopPropagation(evt);
-    }
+    const onMarkerClickHandler = useCallback(
+        (evt: LeafletMouseEvent, feature: Feature): void => {
+            dispatch(setIcao(feature.properties?.icao));
+            L.DomEvent.stopPropagation(evt);
+        }, [dispatch]);
 
-    function aircraftPointToLayer(feature: Feature, latLng: LatLng) {
+    const aircraftPointToLayer = useCallback( (feature: Feature, latLng: LatLng) => {
         const color = feature.properties?.type === 'TWR' ? 'brown' : 'blue';
         return L.circleMarker(latLng)
             .setStyle({color: color})
             .on("click", (evt: LeafletMouseEvent): void => onMarkerClickHandler(evt, feature))
             .bindTooltip(feature.properties?.desc, {permanent: false, direction: 'top', opacity: 0.75});
-    }
+    }, [onMarkerClickHandler]);
 
     return (
         <MapContainer
