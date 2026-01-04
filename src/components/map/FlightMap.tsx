@@ -68,7 +68,7 @@ export function FlightMap() {
             L.DomEvent.stopPropagation(evt);
         }, [dispatch]);
 
-    const aircraftPointToLayer = useCallback( (feature: Feature, latLng: LatLng) => {
+    const aircraftPointToLayer = useCallback((feature: Feature, latLng: LatLng) => {
         const color = feature.properties?.type === 'TWR' ? 'brown' : 'blue';
         return L.circleMarker(latLng)
             .setStyle({color: color})
