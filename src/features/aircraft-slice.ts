@@ -9,13 +9,13 @@ const initialState: AircraftState = {
 }
 
 const aircraftSlice = createSlice({
-    name: 'Aircraft',
+    name: 'aircraft',
     initialState,
     reducers: {
-        setIcao(state, value) {
-            state.icao = value.payload;
+        setIcao(state, action) {
+            state.icao = action.payload;
         },
-        resetIcao( state) {
+        resetIcao(state) {
             state.icao = '';
         }
     }

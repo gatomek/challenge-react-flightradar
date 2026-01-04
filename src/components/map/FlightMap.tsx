@@ -59,14 +59,20 @@ export function FlightMap() {
     const aircraftCollection: FeatureCollection = makeAircraftCollection(data);
     const dispatch = useAppDispatch();
 
+    const onMapClickHandler = () => {
+        dispatch(resetIcao());
+    }
+
+    const onMarkerClickHandler = (evt: LeafletMouseEvent, feature: Feature): void => {
+        dispatch(setIcao(feature.properties?.icao));
+        L.DomEvent.stopPropagation(evt);
+    }
+
     function aircraftPointToLayer(feature: Feature, latLng: LatLng) {
         const color = feature.properties?.type === 'TWR' ? 'brown' : 'blue';
         return L.circleMarker(latLng)
             .setStyle({color: color})
-            .on("click", (evt: LeafletMouseEvent): void => {
-                dispatch(setIcao(feature.properties?.icao));
-                L.DomEvent.stopPropagation(evt);
-            })
+            .on("click", (evt: LeafletMouseEvent): void => onMarkerClickHandler(evt, feature))
             .bindTooltip(feature.properties?.desc, {permanent: false, direction: 'top', opacity: 0.75});
     }
 
@@ -83,9 +89,7 @@ export function FlightMap() {
                                pointToLayer={aircraftPointToLayer}
                                style={aircraftStyle}/>
             <Marker position={DEFAULT_POSITION}/>
-            <MapClickHandler onMapClick={() => {
-                dispatch(resetIcao());
-            }}/>
+            <MapClickHandler onMapClick={onMapClickHandler}/>
         </MapContainer>
     )
 }
