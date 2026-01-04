@@ -1,5 +1,5 @@
 import {useQuery} from "@tanstack/react-query";
-import type {AircraftData} from "../query/model/AircraftData.ts";
+import type {AircraftData} from "../components/query/model/AircraftData";
 
 export function useLiveAirplanesApi() {
 

@@ -20,7 +20,8 @@ export function makeAircraftCollection(data: AircraftData | undefined): FeatureC
             },
             properties: {
                 desc: "ICAO: " + ac.hex.toUpperCase() + '<br/>ALT: ' + ac.alt_baro + '<br/>TYPE: ' + ac.t + (ac.desc ? " | " + ac.desc : ''),
-                type: ac.t
+                type: ac.t,
+                icao: ac.hex
             }
         }
         return point;
