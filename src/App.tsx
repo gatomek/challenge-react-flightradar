@@ -47,7 +47,7 @@ function App() {
                         <Box
                             sx={{
                                 width: '100%',
-                                height: 'calc(100% - 556px - 4px)',
+                                height: 'calc(100% - 560px)',
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center'
