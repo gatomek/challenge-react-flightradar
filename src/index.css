@@ -4,3 +4,8 @@ html, body, #root {
   margin: 0;
   height: 100%;
 }
+
+/* Remove focus outline for Leaflet elements */
+.leaflet-container :focus {
+  outline: none; /* Disable the black box */
+}

@@ -6,7 +6,7 @@ const aircraftEmptyCollection: FeatureCollection = {
     features: []
 }
 
-export function makeAircraftCollection(data: AircraftData | undefined): FeatureCollection {
+export function makeAircraftCollection(data: AircraftData | undefined, icao: string): FeatureCollection {
     if (!data) {
         return aircraftEmptyCollection;
     }
@@ -21,7 +21,8 @@ export function makeAircraftCollection(data: AircraftData | undefined): FeatureC
             properties: {
                 desc: "ICAO: " + ac.hex.toUpperCase() + '<br/>ALT: ' + ac.alt_baro + '<br/>TYPE: ' + ac.t + (ac.desc ? " | " + ac.desc : ''),
                 type: ac.t,
-                icao: ac.hex
+                icao: ac.hex,
+                marker: icao !== '' && icao === ac.hex
             }
         }
         return point;
