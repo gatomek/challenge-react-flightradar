@@ -41,7 +41,7 @@ function TileLayerSetter(props: Readonly<CustomTileLayer>) {
 
 const aircraftStyle: Record<string, string | number> = {
     weight: 1,
-    radius: 5,
+    radius: 5
 };
 
 type MapClickHandlerProps = {
