@@ -6,6 +6,8 @@
 * material-react-table
 * @mui/x-date-pickers
 * @tanstack/react-query
+* @reduxjs/toolkit
+* react-redux
 
 # ADS-B Links
 * https://airplanes.live/rest-api-adsb-data-field-descriptions/
@@ -40,4 +42,11 @@ git config core.ignorecase false
 # TSC version
 ```
 npx tsc --version
+```
+
+# NPM Toolkit
+```
+npm list
+npm list -g
+npm outdated
 ```

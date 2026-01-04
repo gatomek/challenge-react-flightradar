@@ -3,7 +3,7 @@ import {MaterialReactTable, type MRT_ColumnDef, useMaterialReactTable,} from 'ma
 import {getFlightTableColumns} from "./getFlightTableColumns.ts";
 import type {Airplane} from "./model/Airplane.ts";
 import {makeFlightData} from "./getTestFlightData.ts";
-import {useLiveAirplanesApi} from "../hooks/useLiveAirplanesApi.ts";
+import {useLiveAirplanesApi} from "../../hooks/useLiveAirplanesApi.ts";
 
 export function FlightTable() {
     const {data} = useLiveAirplanesApi();
@@ -23,6 +23,7 @@ export function FlightTable() {
             enablePagination: false,
             enableRowVirtualization: true,
             muiTableContainerProps: {sx: {height: '500px'}},
+            rowVirtualizerOptions: {overscan: 5}
         }
     );
 
