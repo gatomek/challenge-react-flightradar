@@ -64,7 +64,7 @@ export function FlightMap() {
 
     const onMarkerClickHandler = useCallback(
         (evt: LeafletMouseEvent, feature: Feature): void => {
-            dispatch(setIcao(feature.properties?.icao));
+            dispatch(setIcao(feature.properties?.icao ?? ''));
             L.DomEvent.stopPropagation(evt);
         }, [dispatch]);
 
