@@ -13,9 +13,9 @@ import {ReactKeycloakProvider} from "@react-keycloak/web";
 import {SecurityGate} from "./components/keycloak/SecurityGate.tsx";
 
 const keycloak = new Keycloak({
-    url: "https://113-30-190-16.cloud-xip.com:8443/",
-    realm: "kamatera",
-    clientId: "flightradar"
+    url: import.meta.env.VITE_KEYCLOAK_URL,
+    realm: import.meta.env.VITE_KEYCLOAK_REALM,
+    clientId: import.meta.env.VITE_KEYCLOAK_CLIENT_ID
 });
 
 const queryClient = new QueryClient();
