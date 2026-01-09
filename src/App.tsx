@@ -11,6 +11,7 @@ import {DetailsView} from "./components/details/DetailsView.tsx";
 import Keycloak from "keycloak-js";
 import {ReactKeycloakProvider} from "@react-keycloak/web";
 import {SecurityGate} from "./components/keycloak/SecurityGate.tsx";
+import {StrictMode} from 'react'
 
 const keycloak = new Keycloak({
     url: import.meta.env.VITE_KEYCLOAK_URL,
@@ -29,70 +30,72 @@ function App() {
                 checkLoginIframe: false
             }}
         >
-            <SecurityGate>
-                <Provider store={store}>
-                    <QueryClientProvider client={queryClient}>
-                        <Box margin={0} padding={0}
-                             sx={{
-                                 width: '100%',
-                                 height: '100vh',
-                                 display: 'flex',
-                                 justifyContent: 'center',
-                                 alignItems: 'center'
-
-                             }}
-                        >
-                            <AppToolbar/>
-                            <Box margin={0} padding={0} mt={'70px'} maxWidth="xxl"
+            <StrictMode>
+                <SecurityGate>
+                    <Provider store={store}>
+                        <QueryClientProvider client={queryClient}>
+                            <Box margin={0} padding={0}
                                  sx={{
                                      width: '100%',
-                                     height: 'calc(100vh - 72px)',
+                                     height: '100vh',
                                      display: 'flex',
                                      justifyContent: 'center',
                                      alignItems: 'center'
+
                                  }}
                             >
-                                <Box
-                                    sx={{
-                                        width: '50%',
-                                        height: '100%'
-                                    }}
+                                <AppToolbar/>
+                                <Box margin={0} padding={0} mt={'70px'} maxWidth="xxl"
+                                     sx={{
+                                         width: '100%',
+                                         height: 'calc(100vh - 72px)',
+                                         display: 'flex',
+                                         justifyContent: 'center',
+                                         alignItems: 'center'
+                                     }}
                                 >
                                     <Box
                                         sx={{
-                                            width: '100%',
-                                            height: '560px'
+                                            width: '50%',
+                                            height: '100%'
                                         }}
                                     >
-                                        <FlightTable/>
+                                        <Box
+                                            sx={{
+                                                width: '100%',
+                                                height: '560px'
+                                            }}
+                                        >
+                                            <FlightTable/>
+                                        </Box>
+                                        <Box
+                                            sx={{
+                                                width: '100%',
+                                                height: 'calc(100% - 560px)',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center'
+                                            }}
+                                        >
+                                            <DetailsView/>
+                                        </Box>
                                     </Box>
                                     <Box
                                         sx={{
-                                            width: '100%',
-                                            height: 'calc(100% - 560px)',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignItems: 'center'
+                                            width: '50%',
+                                            height: '100%',
+                                            border: 'solid 1px lightgray',
+                                            overflow: "hidden"
                                         }}
                                     >
-                                        <DetailsView/>
+                                        <FlightMap/>
                                     </Box>
-                                </Box>
-                                <Box
-                                    sx={{
-                                        width: '50%',
-                                        height: '100%',
-                                        border: 'solid 1px lightgray',
-                                        overflow: "hidden"
-                                    }}
-                                >
-                                    <FlightMap/>
                                 </Box>
                             </Box>
-                        </Box>
-                    </QueryClientProvider>
-                </Provider>
-            </SecurityGate>
+                        </QueryClientProvider>
+                    </Provider>
+                </SecurityGate>
+            </StrictMode>
         </ReactKeycloakProvider>
     )
 }
