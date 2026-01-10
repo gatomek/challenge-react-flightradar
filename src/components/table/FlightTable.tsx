@@ -12,7 +12,6 @@ import {setIcao} from "../../features/aircraft-slice.ts";
 
 const flightTableColumns = getFlightTableColumns();
 
-
 export function FlightTable() {
     const {data, isLoading, isFetching, refetch} = useLiveAirplanesApi();
     const dispatch = useAppDispatch();
