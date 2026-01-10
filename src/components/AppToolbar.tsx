@@ -115,22 +115,22 @@ export function AppToolbar() {
                         ))}
                     </Box>
                     <Box sx={{flexGrow: 0}}>
-                        {
-                            <div>
-                                {keycloak.authenticated ?
-                                    <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
-                                        <Typography sx={{m: 1}}>
-                                            {keycloak.tokenParsed?.preferred_username}</Typography>
-                                        <Tooltip title='Logout'>
-                                            <PowerSettingsNewIcon sx={{m: 1}} onClick={() => keycloak.logout()}/>
-                                        </Tooltip>
-                                    </Box>
-                                    :
-                                    <Tooltip title='Login'>
-                                        <PersonIcon onClick={() => keycloak.login()}/>
-                                    </Tooltip>
-                                }
-                            </div>
+                        {keycloak.authenticated ?
+                            <Box sx={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
+                                <Typography>
+                                    {keycloak.tokenParsed?.preferred_username}</Typography>
+                                <Tooltip title='Logout'>
+                                    <IconButton sx={{m: 1}} onClick={() => keycloak.logout()}>
+                                        <PowerSettingsNewIcon/>
+                                    </IconButton>
+                                </Tooltip>
+                            </Box>
+                            :
+                            <Tooltip title='Login'>
+                                <IconButton onClick={() => keycloak.login()}>
+                                    <PersonIcon/>
+                                </IconButton>
+                            </Tooltip>
                         }
                     </Box>
                 </Toolbar>
