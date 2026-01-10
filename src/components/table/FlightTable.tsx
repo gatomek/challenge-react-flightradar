@@ -4,9 +4,12 @@ import {getFlightTableColumns} from "./getFlightTableColumns.ts";
 import type {Airplane} from "./model/Airplane.ts";
 import {makeFlightData} from "./getTestFlightData.ts";
 import {useLiveAirplanesApi} from "../../hooks/useLiveAirplanesApi.ts";
+import Tooltip from "@mui/material/Tooltip";
+import RefreshIcon from '@mui/icons-material/Refresh';
+import {IconButton} from "@mui/material";
 
 export function FlightTable() {
-    const {data, isLoading,isFetching} = useLiveAirplanesApi();
+    const {data, isLoading, isFetching, isError, refetch} = useLiveAirplanesApi();
     const flightData = useMemo<Airplane[]>(() => makeFlightData(data), [data]);
     const columns = useMemo<MRT_ColumnDef<Airplane>[]>(
         () => getFlightTableColumns(), []
@@ -25,9 +28,23 @@ export function FlightTable() {
             enableRowVirtualization: true,
             muiTableContainerProps: {sx: {height: '500px'}},
             rowVirtualizerOptions: {overscan: 1},
+            renderTopToolbarCustomActions: () => (
+                <Tooltip title="Refresh Data">
+                    <IconButton onClick={() => refetch()}>
+                        <RefreshIcon/>
+                    </IconButton>
+                </Tooltip>
+            ),
+            muiToolbarAlertBannerProps: isError
+                ? {
+                    color: 'error',
+                    children: 'Error loading data',
+                }
+                : undefined,
             state: {
                 isLoading,
                 showProgressBars: isFetching,
+                showAlertBanner: isError
             }
         }
     );
