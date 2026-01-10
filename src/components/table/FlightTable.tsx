@@ -9,7 +9,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import {IconButton} from "@mui/material";
 
 export function FlightTable() {
-    const {data, isLoading, isFetching, isError, refetch} = useLiveAirplanesApi();
+    const {data, isLoading, isFetching, refetch} = useLiveAirplanesApi();
     const flightData = useMemo<Airplane[]>(() => makeFlightData(data), [data]);
     const columns = useMemo<MRT_ColumnDef<Airplane>[]>(
         () => getFlightTableColumns(), []
@@ -39,7 +39,6 @@ export function FlightTable() {
             state: {
                 isLoading,
                 showProgressBars: isFetching,
-                showAlertBanner: isError
             }
         }
     );
