@@ -9,7 +9,10 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import IconButton from "@mui/material/IconButton";
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks.ts";
 import {setIcao} from "../../features/aircraft-slice.ts";
+import {ThemeProvider} from '@mui/material/styles';
+import {getFlightTableTheme} from "./getFlightTableTheme.ts";
 
+const flightTableTheme = getFlightTableTheme();
 const flightTableColumns = getFlightTableColumns();
 
 export function FlightTable() {
@@ -54,6 +57,8 @@ export function FlightTable() {
     );
 
     return (
-        <MaterialReactTable table={table}/>
+        <ThemeProvider theme={flightTableTheme}>
+            <MaterialReactTable table={table}/>
+        </ThemeProvider>
     )
 }
