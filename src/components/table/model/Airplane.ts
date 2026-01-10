@@ -8,5 +8,6 @@ export type Airplane = {
     longitude: number;
     altitude: number | string;
     heading?: number;
-    military: boolean;
+    info: string;
+    selected: boolean;
 }
