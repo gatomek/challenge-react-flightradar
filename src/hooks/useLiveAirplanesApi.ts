@@ -3,7 +3,7 @@ import type {AircraftData} from "../components/query/model/AircraftData";
 
 export function useLiveAirplanesApi() {
 
-    const {data} = useQuery({
+    const {data, isLoading, isFetching} = useQuery({
         queryKey: ['api.airplanes.live'],
         queryFn: async (): Promise<AircraftData> => {
             const res = await fetch('https://api.airplanes.live/v2/point/52.162/20.960/250');
@@ -18,6 +18,8 @@ export function useLiveAirplanesApi() {
     });
 
     return {
-        data
+        data,
+        isLoading,
+        isFetching
     }
 }
