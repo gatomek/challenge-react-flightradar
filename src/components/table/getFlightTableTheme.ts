@@ -2,7 +2,7 @@ import {createTheme, type Theme} from '@mui/material/styles';
 
 const theme: Theme = createTheme({
     components: {
-        MuiChip:{
+        MuiChip: {
             styleOverrides: {
                 root: {
                     fontSize: '0.7rem',
