@@ -33,7 +33,7 @@ export function getFlightTableColumns(): MRT_ColumnDef<Airplane>[] {
             header: 'Info',
             size: 70,
             filterVariant: 'multi-select',
-            filterSelectOptions: ['MIL', 'SEL']
+            columnFilterModeOptions: ["contains"]
         }
     ]
 }
