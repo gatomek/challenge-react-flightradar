@@ -12,6 +12,7 @@ createRoot(document.getElementById('root')!).render(
             onLoad: "login-required",
             checkLoginIframe: false
         }}
+        LoadingComponent={<></>}
     >
         <StrictMode>
             <App/>

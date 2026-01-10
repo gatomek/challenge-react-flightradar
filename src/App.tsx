@@ -8,76 +8,73 @@ import {FlightMap} from "./components/map/FlightMap.tsx";
 import {Provider} from 'react-redux'
 import {store} from './app/store'
 import {DetailsView} from "./components/details/DetailsView.tsx";
-import {SecurityGate} from "./components/keycloak/SecurityGate.tsx";
 
 const queryClient = new QueryClient();
 
 function App() {
     return (
-        <SecurityGate>
-            <Provider store={store}>
-                <QueryClientProvider client={queryClient}>
-                    <Box margin={0} padding={0}
+        <Provider store={store}>
+            <QueryClientProvider client={queryClient}>
+                <Box margin={0} padding={0}
+                     sx={{
+                         width: '100%',
+                         height: '100vh',
+                         display: 'flex',
+                         justifyContent: 'center',
+                         alignItems: 'center'
+
+                     }}
+                >
+                    <AppToolbar/>
+                    <Box margin={0} padding={0} mt={'70px'} maxWidth="xxl"
                          sx={{
                              width: '100%',
-                             height: '100vh',
+                             height: 'calc(100vh - 72px)',
                              display: 'flex',
                              justifyContent: 'center',
                              alignItems: 'center'
-
                          }}
                     >
-                        <AppToolbar/>
-                        <Box margin={0} padding={0} mt={'70px'} maxWidth="xxl"
-                             sx={{
-                                 width: '100%',
-                                 height: 'calc(100vh - 72px)',
-                                 display: 'flex',
-                                 justifyContent: 'center',
-                                 alignItems: 'center'
-                             }}
+                        <Box
+                            sx={{
+                                width: '50%',
+                                height: '100%'
+                            }}
                         >
                             <Box
                                 sx={{
-                                    width: '50%',
-                                    height: '100%'
+                                    width: '100%',
+                                    height: '560px'
                                 }}
                             >
-                                <Box
-                                    sx={{
-                                        width: '100%',
-                                        height: '560px'
-                                    }}
-                                >
-                                    <FlightTable/>
-                                </Box>
-                                <Box
-                                    sx={{
-                                        width: '100%',
-                                        height: 'calc(100% - 560px)',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center'
-                                    }}
-                                >
-                                    <DetailsView/>
-                                </Box>
+                                <FlightTable/>
                             </Box>
                             <Box
                                 sx={{
-                                    width: '50%',
-                                    height: '100%',
-                                    border: 'solid 1px lightgray',
-                                    overflow: "hidden"
+                                    width: '100%',
+                                    height: 'calc(100% - 560px)',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
                                 }}
                             >
-                                <FlightMap/>
+                                <DetailsView/>
                             </Box>
                         </Box>
+                        <Box
+                            sx={{
+                                width: '50%',
+                                height: '100%',
+                                border: 'solid 1px lightgray',
+                                overflow: "hidden"
+                            }}
+                        >
+                            <FlightMap/>
+                        </Box>
                     </Box>
-                </QueryClientProvider>
-            </Provider>
-        </SecurityGate>
+                </Box>
+            </QueryClientProvider>
+        </Provider>
     )
 }
 
