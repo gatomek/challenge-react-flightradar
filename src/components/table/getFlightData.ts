@@ -18,12 +18,12 @@ const flights: Airplane[] = [
     }
 ]
 
-export function getTestFlightData() {
+export function getFlightData() {
     return flights;
 }
 
 function makeAircraftInfo(military: boolean, selected: boolean) {
-    const flags: (null | string)[] = [];
+    const flags: string[] = [];
     if (military) {
         flags.push('MIL');
     }

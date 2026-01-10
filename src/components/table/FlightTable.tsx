@@ -1,8 +1,8 @@
 import {useMemo} from "react";
-import {getMRT_RowSelectionHandler, MaterialReactTable, useMaterialReactTable,} from 'material-react-table';
+import {MaterialReactTable, useMaterialReactTable,} from 'material-react-table';
 import {getFlightTableColumns} from "./getFlightTableColumns.ts";
 import type {Airplane} from "./model/Airplane.ts";
-import {makeFlightData} from "./getTestFlightData.ts";
+import {makeFlightData} from "./getFlightData.ts";
 import {useLiveAirplanesApi} from "../../hooks/useLiveAirplanesApi.ts";
 import Tooltip from "@mui/material/Tooltip";
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -26,13 +26,10 @@ export function FlightTable() {
             initialState: {density: 'compact'},
             enableRowNumbers: true,
             enableRowSelection: false,
-            enableBatchRowSelection: false,
             enableBottomToolbar: false,
             enableGlobalFilterModes: true,
             enablePagination: false,
-            enableSelectAll: false,
             positionToolbarAlertBanner: "none",
-            enableMultiRowSelection: false,
             enableRowVirtualization: true,
             muiTableContainerProps: {sx: {height: '500px'}},
             rowVirtualizerOptions: {overscan: 5},
@@ -43,11 +40,8 @@ export function FlightTable() {
                     </IconButton>
                 </Tooltip>
             ),
-            muiTableBodyRowProps: ({row, staticRowIndex, table}) => ({
-                onClick: (event) => {
-                    dispatch(setIcao(row.original.hex));
-                    getMRT_RowSelectionHandler({row, staticRowIndex, table})(event)
-                },
+            muiTableBodyRowProps: ({row}) => ({
+                onClick: () => dispatch(setIcao(row.original.hex)),
                 sx: {
                     cursor: 'pointer',
                     backgroundColor: row.original.selected ? 'lemonchiffon' : 'inherit'
