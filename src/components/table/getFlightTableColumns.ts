@@ -31,7 +31,9 @@ export function getFlightTableColumns(): MRT_ColumnDef<Airplane>[] {
         {
             accessorKey: 'info',
             header: 'Info',
-            size: 50
+            size: 70,
+            filterVariant: 'multi-select',
+            columnFilterModeOptions: ["contains"]
         }
     ]
 }
