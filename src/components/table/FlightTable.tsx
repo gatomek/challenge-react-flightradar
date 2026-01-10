@@ -1,5 +1,5 @@
 import {useMemo} from "react";
-import {MaterialReactTable, type MRT_ColumnDef, useMaterialReactTable,} from 'material-react-table';
+import {getMRT_RowSelectionHandler, MaterialReactTable, useMaterialReactTable,} from 'material-react-table';
 import {getFlightTableColumns} from "./getFlightTableColumns.ts";
 import type {Airplane} from "./model/Airplane.ts";
 import {makeFlightData} from "./getTestFlightData.ts";
@@ -7,25 +7,32 @@ import {useLiveAirplanesApi} from "../../hooks/useLiveAirplanesApi.ts";
 import Tooltip from "@mui/material/Tooltip";
 import RefreshIcon from '@mui/icons-material/Refresh';
 import IconButton from "@mui/material/IconButton";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks.ts";
+import {setIcao} from "../../features/aircraft-slice.ts";
+
+const flightTableColumns = getFlightTableColumns();
+
 
 export function FlightTable() {
     const {data, isLoading, isFetching, refetch} = useLiveAirplanesApi();
-    const flightData = useMemo<Airplane[]>(() => makeFlightData(data), [data]);
-    const columns = useMemo<MRT_ColumnDef<Airplane>[]>(
-        () => getFlightTableColumns(), []
-    );
+    const dispatch = useAppDispatch();
+    const icao: string = useAppSelector((state) => state.aircraft.icao);
+    const flightData = useMemo<Airplane[]>(() => makeFlightData(data, icao), [data, icao]);
 
     const table = useMaterialReactTable({
-            columns,
+            columns: flightTableColumns,
             data: flightData,
             enableDensityToggle: false,
             initialState: {density: 'compact'},
             enableRowNumbers: true,
             enableRowSelection: false,
+            enableBatchRowSelection: false,
             enableBottomToolbar: false,
             enableGlobalFilterModes: true,
-            positionToolbarAlertBanner: "none",
             enablePagination: false,
+            enableSelectAll: false,
+            positionToolbarAlertBanner: "none",
+            enableMultiRowSelection: false,
             enableRowVirtualization: true,
             muiTableContainerProps: {sx: {height: '500px'}},
             rowVirtualizerOptions: {overscan: 5},
@@ -36,6 +43,16 @@ export function FlightTable() {
                     </IconButton>
                 </Tooltip>
             ),
+            muiTableBodyRowProps: ({row, staticRowIndex, table}) => ({
+                onClick: (event) => {
+                    dispatch(setIcao(row.original.hex));
+                    getMRT_RowSelectionHandler({row, staticRowIndex, table})(event)
+                },
+                sx: {
+                    cursor: 'pointer',
+                    backgroundColor: row.original.selected ? 'lemonchiffon' : 'inherit'
+                }
+            }),
             state: {
                 isLoading,
                 showProgressBars: isFetching,

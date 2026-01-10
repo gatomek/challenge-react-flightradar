@@ -13,7 +13,8 @@ const flights: Airplane[] = [
         altitude: 35050,
         heading: 152.12,
         registration: 'LX-N90453',
-        military: false
+        info: 'MIL',
+        selected: false
     }
 ]
 
@@ -21,23 +22,41 @@ export function getTestFlightData() {
     return flights;
 }
 
-export function makeFlightData(data: undefined | AircraftData): Airplane[] {
+function makeAircraftInfo(military: boolean, selected: boolean) {
+    const flags: (null | string)[] = [];
+    if (military) {
+        flags.push('MIL');
+    }
+    if (selected) {
+        flags.push('SEL');
+    }
+    return flags.join(',');
+
+}
+
+export function makeFlightData(data: undefined | AircraftData, icao: string): Airplane[] {
 
     if (!data)
         return [];
 
     return data.ac
         .toSorted((a: Aircraft, b: Aircraft) => a.hex.localeCompare(b.hex))
-        .map((ac: Aircraft) => ({
-            hex: ac.hex,
-            type: ac.t,
-            desc: ac.desc,
-            registration: ac.r,
-            flight: ac.flight,
-            latitude: ac.lat,
-            longitude: ac.lon,
-            altitude: ac.alt_baro,
-            military: !!(ac.dbFlags && (ac.dbFlags & 1) === 1)
-        }));
+        .map((ac: Aircraft) => {
+            const military: boolean = !!(ac.dbFlags && (ac.dbFlags & 1) === 1);
+            const selected: boolean = ac.hex === icao;
+            return (
+                {
+                    hex: ac.hex,
+                    type: ac.t,
+                    desc: ac.desc,
+                    registration: ac.r,
+                    flight: ac.flight,
+                    latitude: ac.lat,
+                    longitude: ac.lon,
+                    altitude: ac.alt_baro,
+                    info: makeAircraftInfo(military, selected),
+                    selected
+                })
+        });
 }
 
