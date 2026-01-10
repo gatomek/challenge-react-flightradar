@@ -8,6 +8,8 @@
 * @tanstack/react-query
 * @reduxjs/toolkit
 * react-redux
+* keycloak-js
+* @react-keycloak/web
 
 # ADS-B Links
 * https://airplanes.live/rest-api-adsb-data-field-descriptions/
@@ -18,9 +20,13 @@
 * https://rapidapi.com/adsbx/api/adsbexchange-com1
 * https://www.flightradar24.com/
 
-# Interesting resources
+# Interesting Resources
 * https://en.wikipedia.org/wiki/List_of_aviation,_avionics,_aerospace_and_aeronautical_abbreviations
 * https://blog.katowice-airport.com/identyfikacja-samolotow-2014-07/
+* https://darkaico.medium.com/building-a-secure-authentication-system-with-keycloak-react-and-flask-35aeee04e37a
+
+# Keycloak links
+* https://dev.to/anushibin007/keycloak-oauth2-react-js-integration-34bl
 
 # Project preparation
 ```

@@ -13,7 +13,8 @@ export function useLiveAirplanesApi() {
             const json = await res.json();
             return json as AircraftData;
         },
-        refetchInterval: 15 * 1000
+        refetchInterval: 15 * 1000,
+        retry: false,
     });
 
     return {

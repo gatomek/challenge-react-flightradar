@@ -1,6 +1,6 @@
 import type {CustomTileLayer} from "./CustomTileLayer.ts";
 import {stadiaMapsTileLayer} from "./tileLayers.ts";
-import {useCallback, useState} from "react";
+import {useCallback, useMemo, useState} from "react";
 import {useLiveAirplanesApi} from "../../hooks/useLiveAirplanesApi.ts";
 import hash from 'object-hash';
 import type {Feature, FeatureCollection} from 'geojson';
@@ -50,8 +50,10 @@ export function FlightMap() {
     const [tileLayer] = useState<CustomTileLayer>(stadiaMapsTileLayer);
     const {data} = useLiveAirplanesApi();
     const icao: string = useAppSelector((state) => state.aircraft.icao);
-    const aircraftCollection: FeatureCollection = makeAircraftCollection(data, icao);
     const dispatch = useAppDispatch();
+
+    const aircraftCollection: FeatureCollection = useMemo( () =>
+        makeAircraftCollection(data, icao), [data, icao]);
 
     const onMapClickHandler
         = useCallback(() => dispatch(resetIcao()), [dispatch]);

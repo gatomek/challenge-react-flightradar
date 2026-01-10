@@ -8,31 +8,25 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import RadarIcon from '@mui/icons-material/Radar';
+import {useKeycloak} from '@react-keycloak/web';
+import PersonIcon from '@mui/icons-material/Person';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 
 const pages = ['Radar', 'Settings'];
-const settings = ['Profile', 'Logout'];
 
 export function AppToolbar() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-    const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+    const {keycloak} = useKeycloak();
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
-    };
     const handleCloseNavMenu = (): void => {
         setAnchorElNav(null);
-    };
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
     };
 
     return (
@@ -121,33 +115,23 @@ export function AppToolbar() {
                         ))}
                     </Box>
                     <Box sx={{flexGrow: 0}}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{mt: '45px'}}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography sx={{textAlign: 'center'}}>{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
+                        {keycloak.authenticated ?
+                            <Box sx={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
+                                <Typography>
+                                    {keycloak.tokenParsed?.preferred_username}</Typography>
+                                <Tooltip title='Logout'>
+                                    <IconButton sx={{m: 1}} onClick={() => keycloak.logout()}>
+                                        <PowerSettingsNewIcon/>
+                                    </IconButton>
+                                </Tooltip>
+                            </Box>
+                            :
+                            <Tooltip title='Login'>
+                                <IconButton onClick={() => keycloak.login()}>
+                                    <PersonIcon/>
+                                </IconButton>
+                            </Tooltip>
+                        }
                     </Box>
                 </Toolbar>
             </Container>
