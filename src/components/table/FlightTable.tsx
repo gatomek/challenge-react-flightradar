@@ -24,10 +24,11 @@ export function FlightTable() {
             enableRowSelection: false,
             enableBottomToolbar: false,
             enableGlobalFilterModes: true,
+            positionToolbarAlertBanner: "none",
             enablePagination: false,
             enableRowVirtualization: true,
             muiTableContainerProps: {sx: {height: '500px'}},
-            rowVirtualizerOptions: {overscan: 1},
+            rowVirtualizerOptions: {overscan: 5},
             renderTopToolbarCustomActions: () => (
                 <Tooltip title="Refresh Data">
                     <IconButton onClick={() => refetch()}>
@@ -35,12 +36,6 @@ export function FlightTable() {
                     </IconButton>
                 </Tooltip>
             ),
-            muiToolbarAlertBannerProps: isError
-                ? {
-                    color: 'error',
-                    children: 'Error loading data',
-                }
-                : undefined,
             state: {
                 isLoading,
                 showProgressBars: isFetching,
