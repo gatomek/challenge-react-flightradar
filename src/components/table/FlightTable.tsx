@@ -6,7 +6,7 @@ import {makeFlightData} from "./getTestFlightData.ts";
 import {useLiveAirplanesApi} from "../../hooks/useLiveAirplanesApi.ts";
 import Tooltip from "@mui/material/Tooltip";
 import RefreshIcon from '@mui/icons-material/Refresh';
-import {IconButton} from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 
 export function FlightTable() {
     const {data, isLoading, isFetching, refetch} = useLiveAirplanesApi();
