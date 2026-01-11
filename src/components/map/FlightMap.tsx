@@ -8,7 +8,7 @@ import L, {LatLng, type LatLngTuple, Layer, type LeafletMouseEvent} from "leafle
 import {GeoJSON, MapContainer, Marker, TileLayer, useMapEvent} from 'react-leaflet'
 import {makeAircraftCollection} from "./makeAircraftCollection.ts";
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks.ts";
-import {resetIcao, setIcao} from "../../features/aircraft-slice.ts";
+import {resetIcao, setIcao} from "../../app/aircraft-slice.ts";
 
 const DEFAULT_POSITION: LatLngTuple = [52.162, 20.96];
 

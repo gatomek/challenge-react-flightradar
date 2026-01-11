@@ -8,7 +8,7 @@ import Tooltip from "@mui/material/Tooltip";
 import RefreshIcon from '@mui/icons-material/Refresh';
 import IconButton from "@mui/material/IconButton";
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks.ts";
-import {setIcao} from "../../features/aircraft-slice.ts";
+import {setIcao} from "../../app/aircraft-slice.ts";
 import {ThemeProvider} from '@mui/material/styles';
 import {getFlightTableTheme} from "./getFlightTableTheme.ts";
 

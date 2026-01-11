@@ -1,4 +1,3 @@
-import * as React from "react";
 import {useState} from "react";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -8,15 +7,14 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import RadarIcon from '@mui/icons-material/Radar';
 import {useKeycloak} from '@react-keycloak/web';
 import PersonIcon from '@mui/icons-material/Person';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-
-const pages = ['Radar', 'Settings'];
+import {NavLink} from "react-router";
+import {type PageProps, PAGES} from "../constants/pages.ts";
 
 export function AppToolbar() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -77,9 +75,19 @@ export function AppToolbar() {
                             onClose={handleCloseNavMenu}
                             sx={{display: {xs: 'block', md: 'none'}}}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography sx={{textAlign: 'center'}}>{page}</Typography>
+                            {PAGES.map((page: PageProps) => (
+                                <MenuItem key={page.label} onClick={handleCloseNavMenu}>
+                                    <NavLink
+                                        key={page.path}
+                                        to={page.path}
+                                        style={{
+                                            textDecoration: 'none',
+                                            textTransform: 'uppercase',
+                                            textAlign: 'center'
+                                        }}
+                                    >
+                                        {page.label}
+                                    </NavLink>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -103,17 +111,26 @@ export function AppToolbar() {
                     >
                         FlightRadar
                     </Typography>
+
                     <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{my: 2, color: 'white', display: 'block'}}
+                        {PAGES.map((page: PageProps) => (
+                            <NavLink
+                                key={page.path}
+                                to={page.path}
+                                style={ ({isActive}) => {
+                                    return {
+                                        color: 'white',
+                                        padding: 10,
+                                        textDecoration: isActive ? 'underline' : 'none',
+                                        textTransform: 'uppercase'
+                                    }
+                                }}
                             >
-                                {page}
-                            </Button>
+                                {page.label}
+                            </NavLink>
                         ))}
                     </Box>
+
                     <Box sx={{flexGrow: 0}}>
                         {keycloak.authenticated ?
                             <Box sx={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
