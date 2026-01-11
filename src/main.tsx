@@ -11,9 +11,10 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import {Provider} from 'react-redux'
 import {store} from './app/store'
 import {getRouterConfig} from "./app/getRouterConfig.tsx";
+import {createBrowserRouter} from "react-router";
 
 const queryClient = new QueryClient();
-const router = getRouterConfig();
+const router = createBrowserRouter(getRouterConfig());
 
 createRoot(document.getElementById('root')!).render(
     <ReactKeycloakProvider
