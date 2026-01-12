@@ -46,7 +46,7 @@ const MapClickHandler = (props: Readonly<MapClickHandlerProps>) => {
     return null;
 };
 
-const colorMarkerToColor = (colorMarker: string) => {
+const colorMarkerToColor = (colorMarker: undefined | string) => {
     if (colorMarker === 'TWR') {
         return 'brown';
     }
