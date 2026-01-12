@@ -14,7 +14,9 @@ export function MainContent() {
              }}
         >
             <AppToolbar/>
-            <Outlet/>
+            <Box sx={{flexGrow: 1}}>
+                <Outlet/>
+            </Box>
             <AppFooter/>
         </Box>
     )

@@ -19,7 +19,7 @@ export function AppFooter() {
                         color: 'inherit',
                     }}
                 >
-                    Online
+                    ©2025 FlightRadar
                 </Typography>
             </Toolbar>
         </AppBar>
