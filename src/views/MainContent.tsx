@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import {AppToolbar} from "./AppToolbar.tsx";
 import {Outlet} from "react-router-dom";
+import {AppFooter} from "./AppFooter.tsx";
 
 export function MainContent() {
     return (
@@ -14,6 +15,7 @@ export function MainContent() {
         >
             <AppToolbar/>
             <Outlet/>
+            <AppFooter/>
         </Box>
     )
 }

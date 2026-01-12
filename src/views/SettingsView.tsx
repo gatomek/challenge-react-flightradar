@@ -9,7 +9,6 @@ export function SettingsView() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                mt: '56px'
             }}
         >
             <h3>Settings</h3>

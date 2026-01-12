@@ -9,7 +9,6 @@ export function ProfileView() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                mt: '56px'
             }}
         >
             <h3>Profile</h3>

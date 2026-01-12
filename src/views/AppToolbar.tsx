@@ -27,7 +27,7 @@ export function AppToolbar() {
     };
 
     return (
-        <AppBar position="fixed">
+        <AppBar position="sticky" sx={{top: 0, bottom: 'auto'}}>
             <Toolbar variant={"dense"}>
                 <RadarIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/>
                 <Typography
