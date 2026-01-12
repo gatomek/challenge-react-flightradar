@@ -5,13 +5,15 @@ import {DetailsView} from "../components/details/DetailsView.tsx";
 
 export function AircraftsView() {
     return (
-        <Box margin={0} padding={0} mt={'70px'} maxWidth="xxl"
+        <Box
              sx={{
                  width: '100%',
-                 height: 'calc(100vh - 72px)',
+                 height: '100%',
                  display: 'flex',
-                 justifyContent: 'center',
-                 alignItems: 'center'
+                 m: '0',
+                 p: '0',
+                 maxWidth: 'false',
+                 mt: '56px'
              }}
         >
             <Box
@@ -20,12 +22,7 @@ export function AircraftsView() {
                     height: '100%'
                 }}
             >
-                <Box
-                    sx={{
-                        width: '100%',
-                        height: '560px'
-                    }}
-                >
+                <Box height="560px" width="100%">
                     <FlightTable/>
                 </Box>
                 <Box
@@ -44,7 +41,6 @@ export function AircraftsView() {
                 sx={{
                     width: '50%',
                     height: '100%',
-                    border: 'solid 1px lightgray',
                     overflow: "hidden"
                 }}
             >
