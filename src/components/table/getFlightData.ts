@@ -22,10 +22,13 @@ export function getFlightData() {
     return flights;
 }
 
-function makeAircraftInfo(military: boolean, selected: boolean) {
+function makeAircraftInfo(military: boolean, interesting: boolean, selected: boolean) {
     const flags: string[] = [];
     if (military) {
         flags.push('MIL');
+    }
+    if (interesting) {
+        flags.push('INT');
     }
     if (selected) {
         flags.push('SEL');
@@ -34,15 +37,24 @@ function makeAircraftInfo(military: boolean, selected: boolean) {
 
 }
 
-export function makeFlightData(data: undefined | AircraftData, icao: string): Airplane[] {
+function isMilitary(ac: Aircraft) {
+    return !!(ac.dbFlags && (ac.dbFlags & 1) === 1);
+}
 
+function isInteresting(ac: Aircraft) {
+    return !!(ac.dbFlags && (ac.dbFlags & 2) === 2);
+}
+
+export function makeFlightData(data: undefined | AircraftData, icao: string): Airplane[] {
     if (!data)
         return [];
 
     return data.ac
         .toSorted((a: Aircraft, b: Aircraft) => a.hex.localeCompare(b.hex))
         .map((ac: Aircraft) => {
-            const military: boolean = !!(ac.dbFlags && (ac.dbFlags & 1) === 1);
+            const military: boolean = isMilitary(ac);
+            const interesting: boolean = isInteresting(ac);
+
             const selected: boolean = ac.hex === icao;
             return (
                 {
@@ -54,7 +66,7 @@ export function makeFlightData(data: undefined | AircraftData, icao: string): Ai
                     latitude: ac.lat,
                     longitude: ac.lon,
                     altitude: ac.alt_baro,
-                    info: makeAircraftInfo(military, selected),
+                    info: makeAircraftInfo(military, interesting, selected),
                     selected
                 })
         });
