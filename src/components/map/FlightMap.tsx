@@ -46,13 +46,24 @@ const MapClickHandler = (props: Readonly<MapClickHandlerProps>) => {
     return null;
 };
 
+const colorMarkerToColor = (colorMarker: string) => {
+    if (colorMarker === 'TWR') {
+        return 'brown';
+    }
+    if (colorMarker === 'GND') {
+        return 'darkgreen';
+    }
+
+    return 'blue';
+}
+
 export function FlightMap() {
     const [tileLayer] = useState<CustomTileLayer>(stadiaMapsTileLayer);
     const {data} = useLiveAirplanesApi();
     const icao: string = useAppSelector((state) => state.aircraft.icao);
     const dispatch = useAppDispatch();
 
-    const aircraftCollection: FeatureCollection = useMemo( () =>
+    const aircraftCollection: FeatureCollection = useMemo(() =>
         makeAircraftCollection(data, icao), [data, icao]);
 
     const onMapClickHandler
@@ -65,7 +76,7 @@ export function FlightMap() {
         }, [dispatch]);
 
     const aircraftPointToLayer = useCallback((feature: Feature, latLng: LatLng) => {
-        const color = feature.properties?.type === 'TWR' ? 'brown' : 'blue';
+        const color = colorMarkerToColor(feature.properties?.colorMarker);
         const radius = feature.properties?.marker === true ? 10 : 5;
         return L.circleMarker(latLng, {color: color, radius, weight: 1})
             .on("click", (evt: LeafletMouseEvent): void => onMarkerClickHandler(evt, feature))

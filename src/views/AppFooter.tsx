@@ -5,20 +5,19 @@ import Typography from '@mui/material/Typography';
 export function AppFooter() {
     return (
         <AppBar
-            color={"info"}
             position="sticky"
             sx={{
                 bottom: 0,
                 top: 'auto'
             }}
         >
-            <Toolbar variant={"dense"}>
-                <Typography
-                    noWrap
-                    sx={{
-                        color: 'inherit',
-                    }}
-                >
+            <Toolbar variant={"dense"}
+                     sx={{
+                         display: 'flex',
+                         justifyContent: 'center'
+                     }}
+            >
+                <Typography noWrap>
                     ©2025 FlightRadar
                 </Typography>
             </Toolbar>
