@@ -1,11 +1,8 @@
 import Box from '@mui/material/Box';
 import {AppToolbar} from "./AppToolbar.tsx";
+import {Outlet} from "react-router-dom";
 
-export type MainContentProps = {
-    children: React.ReactNode;
-}
-
-export function MainContent( props: Readonly<MainContentProps>) {
+export function MainContent() {
     return (
         <Box margin={0} padding={0}
              sx={{
@@ -17,9 +14,7 @@ export function MainContent( props: Readonly<MainContentProps>) {
              }}
         >
             <AppToolbar/>
-            {
-                props.children
-            }
+            <Outlet />
         </Box>
     )
 }
