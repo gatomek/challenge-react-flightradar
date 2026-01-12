@@ -12,7 +12,6 @@ export function AircraftsView() {
                  display: 'flex',
                  m: '0',
                  p: '0',
-                 maxWidth: 'false',
                  mt: '56px'
              }}
         >

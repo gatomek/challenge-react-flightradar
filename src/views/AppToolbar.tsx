@@ -76,7 +76,6 @@ export function AppToolbar() {
                         {PAGES.map((page: PageConfig) => (
                             <MenuItem key={page.label} onClick={handleCloseNavMenu}>
                                 <NavLink
-                                    key={page.path}
                                     to={page.path}
                                     style={{
                                         textDecoration: 'none',
