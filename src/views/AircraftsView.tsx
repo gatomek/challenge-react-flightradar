@@ -10,9 +10,6 @@ export function AircraftsView() {
                  width: '100%',
                  height: '100%',
                  display: 'flex',
-                 m: '0',
-                 p: '0',
-                 mt: '56px'
              }}
         >
             <Box
