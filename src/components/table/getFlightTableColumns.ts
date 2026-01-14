@@ -4,7 +4,7 @@ import type {Airplane} from "./model/Airplane.ts";
 export function getFlightTableColumns(): MRT_ColumnDef<Airplane>[] {
     return [
         {
-            accessorFn: (row) => row.hex.toUpperCase(),
+            accessorFn: (row) => row.hex,
             header: 'ICAO',
             size: 50
         },
@@ -33,7 +33,7 @@ export function getFlightTableColumns(): MRT_ColumnDef<Airplane>[] {
             header: 'Info',
             size: 50,
             filterVariant: 'multi-select',
-            filterSelectOptions: ['MIL', 'SEL'],
+            filterSelectOptions: ['MIL', 'SEL', 'INT'],
             columnFilterModeOptions: ["contains"]
         }
     ]
