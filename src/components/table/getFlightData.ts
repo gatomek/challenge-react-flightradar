@@ -58,7 +58,7 @@ export function makeFlightData(data: undefined | AircraftData, icao: string): Ai
             const selected: boolean = ac.hex === icao;
             return (
                 {
-                    hex: ac.hex,
+                    hex: ac.hex.toUpperCase(),
                     type: ac.t,
                     desc: ac.desc,
                     registration: ac.r,

@@ -4,14 +4,9 @@ import type {Airplane} from "./model/Airplane.ts";
 export function getFlightTableColumns(): MRT_ColumnDef<Airplane>[] {
     return [
         {
-            accessorKey: 'hex',
+            accessorFn: (row) => row.hex,
             header: 'ICAO',
-            size: 50,
-            muiTableBodyCellProps: {
-                sx: {
-                    textTransform: 'uppercase'
-                },
-            },
+            size: 50
         },
         {
             accessorKey: 'flight',
