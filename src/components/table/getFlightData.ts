@@ -4,7 +4,7 @@ import type {Aircraft} from "../query/model/Aircraft.ts";
 
 const flights: Airplane[] = [
     {
-        hex: "4baa90",
+        hex: "4BAA90",
         flight: "THY6YX",
         type: "A321",
         desc: "AIRBUS A-321",
@@ -52,13 +52,14 @@ export function makeFlightData(data: undefined | AircraftData, icao: string): Ai
     return data.ac
         .toSorted((a: Aircraft, b: Aircraft) => a.hex.localeCompare(b.hex))
         .map((ac: Aircraft) => {
+            const hex = ac.hex.toUpperCase();
             const military: boolean = isMilitary(ac);
             const interesting: boolean = isInteresting(ac);
 
-            const selected: boolean = ac.hex === icao;
+            const selected: boolean = hex === icao;
             return (
                 {
-                    hex: ac.hex.toUpperCase(),
+                    hex,
                     type: ac.t,
                     desc: ac.desc,
                     registration: ac.r,
