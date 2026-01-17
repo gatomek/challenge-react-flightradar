@@ -1,5 +1,18 @@
 import {useQuery} from "@tanstack/react-query";
 import type {AircraftData} from "../components/query/model/AircraftData";
+import {errata} from "../data.ts";
+import type {Aircraft} from "../components/query/model/Aircraft.ts";
+
+const applyErrata = (data: AircraftData): AircraftData => {
+    const corrected = data.ac.map(ac => {
+        const hex: string = ac.hex.toUpperCase();
+        const correction: Partial<Aircraft> = errata[hex];
+        return correction ? {...ac, hex, ...correction} : {...ac, hex};
+    });
+
+    return {total: data.total, ac: corrected};
+}
+
 
 export function useLiveAirplanesApi() {
 
@@ -15,7 +28,8 @@ export function useLiveAirplanesApi() {
         },
         refetchInterval: 15 * 1000,
         retry: false,
-        refetchIntervalInBackground: true
+        refetchIntervalInBackground: true,
+        select: (data: AircraftData): AircraftData => applyErrata(data)
     });
 
     return {

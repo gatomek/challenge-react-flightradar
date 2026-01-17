@@ -23,7 +23,7 @@ export function makeAircraftCollection(data: AircraftData | undefined, icao: str
     }
 
     const aircraftPoints: Feature<Point>[] = data.ac.map(ac => {
-        const hex = ac.hex.toUpperCase();
+        const hex = ac.hex;
         const point: Feature<Point> = {
             type: "Feature",
             geometry: {
@@ -38,6 +38,7 @@ export function makeAircraftCollection(data: AircraftData | undefined, icao: str
                 colorMarker: toColorMarker(ac)
             }
         }
+
         return point;
     });
 
