@@ -74,8 +74,8 @@ export function DetailsView() {
                          alt={`Aircraft with ICAO code {icao}`}
                          style={{
                              objectFit: 'contain',
-                             width: '100%',
-                             height: '100%'
+                             maxWidth: '100%',
+                             height: 'auto'
                          }}
                     />
                 }
