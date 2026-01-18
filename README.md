@@ -28,6 +28,9 @@
 # Keycloak links
 * https://dev.to/anushibin007/keycloak-oauth2-react-js-integration-34bl
 
+# Typescript
+* https://www.typescriptlang.org/docs/handbook/utility-types.html
+
 # Project preparation
 ```
 npm install leaflet

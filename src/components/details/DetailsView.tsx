@@ -67,7 +67,7 @@ export function DetailsView() {
                 justifyContent: 'center',
                 p: '1rem',
                 borderLeft: 'solid 1px lightgray',
-                width: '75%',
+                width: '75%'
             }}>
                 {image &&
                     <img src={image}
@@ -75,7 +75,7 @@ export function DetailsView() {
                          style={{
                              objectFit: 'contain',
                              maxWidth: '100%',
-                             height: '100%'
+                             height: 'auto'
                          }}
                     />
                 }

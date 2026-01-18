@@ -52,24 +52,23 @@ export function makeFlightData(data: undefined | AircraftData, icao: string): Ai
     return data.ac
         .toSorted((a: Aircraft, b: Aircraft) => a.hex.localeCompare(b.hex))
         .map((ac: Aircraft) => {
-            const hex = ac.hex.toUpperCase();
+            const hex = ac.hex;
             const military: boolean = isMilitary(ac);
             const interesting: boolean = isInteresting(ac);
 
             const selected: boolean = hex === icao;
-            return (
-                {
-                    hex,
-                    type: ac.t,
-                    desc: ac.desc,
-                    registration: ac.r,
-                    flight: ac.flight,
-                    latitude: ac.lat,
-                    longitude: ac.lon,
-                    altitude: ac.alt_baro,
-                    info: makeAircraftInfo(military, interesting, selected),
-                    selected
-                })
+            return {
+                hex,
+                type: ac.t,
+                desc: ac.desc,
+                registration: ac.r,
+                flight: ac.flight,
+                latitude: ac.lat,
+                longitude: ac.lon,
+                altitude: ac.alt_baro,
+                info: makeAircraftInfo(military, interesting, selected),
+                selected
+            };
         });
 }
 
