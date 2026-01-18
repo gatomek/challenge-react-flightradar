@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import type {AircraftData} from "../components/query/model/AircraftData";
-import {errata} from "../data.ts";
+import {errata} from "../data/errata.ts";
 import type {Aircraft} from "../components/query/model/Aircraft.ts";
 
 const applyErrata = (data: AircraftData): AircraftData => {
