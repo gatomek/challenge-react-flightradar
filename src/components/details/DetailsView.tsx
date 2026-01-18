@@ -65,17 +65,17 @@ export function DetailsView() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                m: '1rem',
+                p: '1rem',
                 borderLeft: 'solid 1px lightgray',
-                width: '75%'
+                width: '75%',
             }}>
                 {image &&
                     <img src={image}
                          alt={`Aircraft with ICAO code {icao}`}
                          style={{
                              objectFit: 'contain',
-                             width: '610px',
-                             height: '400px'
+                             maxWidth: '100%',
+                             height: '100%'
                          }}
                     />
                 }
