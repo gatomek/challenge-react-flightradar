@@ -7,7 +7,7 @@ const applyErrata = (data: AircraftData): AircraftData => {
     const corrected = data.ac.map(ac => {
         const hex: string = ac.hex.toUpperCase();
         const correction: Partial<Aircraft> = errata[hex];
-        return {...ac, hex, ...(correction ? correction : {})};
+        return correction ? {...ac, hex, ...correction} : {...ac, hex};
     });
 
     return {total: data.total, ac: corrected};
@@ -26,6 +26,7 @@ export function useLiveAirplanesApi() {
             return json as AircraftData;
         },
         refetchInterval: 15_000,
+        retry: 3,
         retryDelay: 5_000,
         refetchIntervalInBackground: true,
         refetchOnWindowFocus: false,
