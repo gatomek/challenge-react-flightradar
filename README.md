@@ -58,4 +58,5 @@ npx tsc --version
 npm list
 npm list -g
 npm outdated
+npm run dev -- --force
 ```
