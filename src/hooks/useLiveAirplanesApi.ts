@@ -7,12 +7,11 @@ const applyErrata = (data: AircraftData): AircraftData => {
     const corrected = data.ac.map(ac => {
         const hex: string = ac.hex.toUpperCase();
         const correction: Partial<Aircraft> = errata[hex];
-        return correction ? {...ac, hex, ...correction} : {...ac, hex};
+        return {...ac, hex, ...(correction ? correction : {})};
     });
 
     return {total: data.total, ac: corrected};
 }
-
 
 export function useLiveAirplanesApi() {
 
@@ -26,9 +25,11 @@ export function useLiveAirplanesApi() {
             const json = await res.json();
             return json as AircraftData;
         },
-        refetchInterval: 15 * 1000,
-        retry: false,
+        refetchInterval: 15_000,
+        retryDelay: 5_000,
         refetchIntervalInBackground: true,
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: true,
         select: (data: AircraftData): AircraftData => applyErrata(data)
     });
 
