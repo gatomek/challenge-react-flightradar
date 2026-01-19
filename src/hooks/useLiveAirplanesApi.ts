@@ -13,7 +13,6 @@ const applyErrata = (data: AircraftData): AircraftData => {
     return {total: data.total, ac: corrected};
 }
 
-
 export function useLiveAirplanesApi() {
 
     const {data, isLoading, isFetching, isError, refetch} = useQuery({
@@ -26,9 +25,12 @@ export function useLiveAirplanesApi() {
             const json = await res.json();
             return json as AircraftData;
         },
-        refetchInterval: 15 * 1000,
-        retry: false,
+        refetchInterval: 15_000,
+        retry: 3,
+        retryDelay: 5_000,
         refetchIntervalInBackground: true,
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: true,
         select: (data: AircraftData): AircraftData => applyErrata(data)
     });
 

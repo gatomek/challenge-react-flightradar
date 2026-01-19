@@ -27,7 +27,7 @@ export function AppToolbar() {
     };
 
     return (
-        <AppBar position="sticky" sx={{top: 0, bottom: 'auto'}}>
+        <AppBar position="sticky" sx={{top: 0, bottom: 'auto'}} variant={"outlined"}>
             <Toolbar variant={"dense"}>
                 <RadarIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/>
                 <Typography
@@ -132,17 +132,18 @@ export function AppToolbar() {
                     {keycloak.authenticated ?
                         <Box sx={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
                             <Typography>
-                                {keycloak.tokenParsed?.preferred_username}</Typography>
+                                {keycloak.tokenParsed?.preferred_username}
+                            </Typography>
                             <Tooltip title='Logout'>
-                                <IconButton sx={{m: 1}} onClick={() => keycloak.logout()}>
-                                    <PowerSettingsNewIcon/>
+                                <IconButton onClick={() => keycloak.logout()}>
+                                    <PowerSettingsNewIcon sx={{color: 'white'}}/>
                                 </IconButton>
                             </Tooltip>
                         </Box>
                         :
                         <Tooltip title='Login'>
                             <IconButton onClick={() => keycloak.login()}>
-                                <PersonIcon/>
+                                <PersonIcon sx={{color: 'white'}}/>
                             </IconButton>
                         </Tooltip>
                     }
