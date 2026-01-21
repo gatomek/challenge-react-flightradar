@@ -1,6 +1,6 @@
-import {configureStore} from "@reduxjs/toolkit";
+import {configureStore} from '@reduxjs/toolkit';
 
-import aircraftReducer from './aircraft-slice'
+import aircraftReducer from './aircraft-slice';
 
 export const store = configureStore({
     reducer: {

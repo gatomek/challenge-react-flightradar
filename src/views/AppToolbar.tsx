@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,8 +12,8 @@ import RadarIcon from '@mui/icons-material/Radar';
 import {useKeycloak} from '@react-keycloak/web';
 import PersonIcon from '@mui/icons-material/Person';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import {NavLink} from "react-router-dom";
-import {type PageConfig, PAGES} from "../constants/pages.ts";
+import {NavLink} from 'react-router-dom';
+import {type PageConfig, PAGES} from '../constants/pages.ts';
 
 export function AppToolbar() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -27,9 +27,9 @@ export function AppToolbar() {
     };
 
     return (
-        <AppBar position="sticky" sx={{top: 0, bottom: 'auto'}} variant={"outlined"}>
-            <Toolbar variant={"dense"}>
-                <RadarIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/>
+        <AppBar position="sticky" sx={{top: 0, bottom: 'auto'}} variant={'outlined'}>
+            <Toolbar variant={'dense'}>
+                <RadarIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}} />
                 <Typography
                     variant="h6"
                     noWrap
@@ -40,7 +40,7 @@ export function AppToolbar() {
                         fontWeight: 700,
                         letterSpacing: '.3rem',
                         color: 'inherit',
-                        textDecoration: 'none',
+                        textDecoration: 'none'
                     }}
                 >
                     FlightRadar
@@ -55,19 +55,19 @@ export function AppToolbar() {
                         onClick={handleOpenNavMenu}
                         color="inherit"
                     >
-                        <MenuIcon/>
+                        <MenuIcon />
                     </IconButton>
                     <Menu
                         id="menu-appbar"
                         anchorEl={anchorElNav}
                         anchorOrigin={{
                             vertical: 'bottom',
-                            horizontal: 'left',
+                            horizontal: 'left'
                         }}
                         keepMounted
                         transformOrigin={{
                             vertical: 'top',
-                            horizontal: 'left',
+                            horizontal: 'left'
                         }}
                         open={Boolean(anchorElNav)}
                         onClose={handleCloseNavMenu}
@@ -90,7 +90,7 @@ export function AppToolbar() {
                     </Menu>
                 </Box>
 
-                <RadarIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>
+                <RadarIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}} />
 
                 <Typography
                     variant="h6"
@@ -103,7 +103,7 @@ export function AppToolbar() {
                         fontWeight: 700,
                         letterSpacing: '.3rem',
                         color: 'inherit',
-                        textDecoration: 'none',
+                        textDecoration: 'none'
                     }}
                 >
                     FlightRadar
@@ -120,7 +120,7 @@ export function AppToolbar() {
                                     padding: 10,
                                     textDecoration: isActive ? 'underline' : 'none',
                                     textTransform: 'uppercase'
-                                }
+                                };
                             }}
                         >
                             {page.label}
@@ -129,26 +129,24 @@ export function AppToolbar() {
                 </Box>
 
                 <Box sx={{flexGrow: 0}}>
-                    {keycloak.authenticated ?
+                    {keycloak.authenticated ? (
                         <Box sx={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
-                            <Typography>
-                                {keycloak.tokenParsed?.preferred_username}
-                            </Typography>
-                            <Tooltip title='Logout'>
+                            <Typography>{keycloak.tokenParsed?.preferred_username}</Typography>
+                            <Tooltip title="Logout">
                                 <IconButton onClick={() => keycloak.logout()}>
-                                    <PowerSettingsNewIcon sx={{color: 'white'}}/>
+                                    <PowerSettingsNewIcon sx={{color: 'white'}} />
                                 </IconButton>
                             </Tooltip>
                         </Box>
-                        :
-                        <Tooltip title='Login'>
+                    ) : (
+                        <Tooltip title="Login">
                             <IconButton onClick={() => keycloak.login()}>
-                                <PersonIcon sx={{color: 'white'}}/>
+                                <PersonIcon sx={{color: 'white'}} />
                             </IconButton>
                         </Tooltip>
-                    }
+                    )}
                 </Box>
             </Toolbar>
         </AppBar>
-    )
+    );
 }

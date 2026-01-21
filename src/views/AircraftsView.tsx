@@ -1,16 +1,16 @@
 import Box from '@mui/material/Box';
-import {FlightTable} from "../components/table/FlightTable.tsx";
-import {FlightMap} from "../components/map/FlightMap.tsx";
-import {DetailsView} from "../components/details/DetailsView.tsx";
+import {FlightTable} from '../components/table/FlightTable.tsx';
+import {FlightMap} from '../components/map/FlightMap.tsx';
+import {DetailsView} from '../components/details/DetailsView.tsx';
 
 export function AircraftsView() {
     return (
         <Box
-             sx={{
-                 width: '100%',
-                 height: '100%',
-                 display: 'flex',
-             }}
+            sx={{
+                width: '100%',
+                height: '100%',
+                display: 'flex'
+            }}
         >
             <Box
                 sx={{
@@ -19,7 +19,7 @@ export function AircraftsView() {
                 }}
             >
                 <Box height="560px" width="100%">
-                    <FlightTable/>
+                    <FlightTable />
                 </Box>
                 <Box
                     sx={{
@@ -30,18 +30,18 @@ export function AircraftsView() {
                         alignItems: 'center'
                     }}
                 >
-                    <DetailsView/>
+                    <DetailsView />
                 </Box>
             </Box>
             <Box
                 sx={{
                     width: '50%',
                     height: '100%',
-                    overflow: "hidden"
+                    overflow: 'hidden'
                 }}
             >
-                <FlightMap/>
+                <FlightMap />
             </Box>
         </Box>
-    )
+    );
 }

@@ -1,5 +1,5 @@
-import type {MRT_ColumnDef} from "material-react-table";
-import type {Airplane} from "./model/Airplane.ts";
+import type {MRT_ColumnDef} from 'material-react-table';
+import type {Airplane} from './model/Airplane.ts';
 
 export function getFlightTableColumns(): MRT_ColumnDef<Airplane>[] {
     return [
@@ -34,7 +34,7 @@ export function getFlightTableColumns(): MRT_ColumnDef<Airplane>[] {
             size: 50,
             filterVariant: 'multi-select',
             filterSelectOptions: ['MIL', 'SEL', 'INT'],
-            columnFilterModeOptions: ["contains"]
+            columnFilterModeOptions: ['contains']
         }
-    ]
+    ];
 }

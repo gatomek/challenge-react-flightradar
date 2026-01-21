@@ -1,4 +1,4 @@
-import type {Aircraft} from "./Aircraft.ts";
+import type {Aircraft} from './Aircraft.ts';
 
 export type AircraftData = {
     ac: Aircraft[];

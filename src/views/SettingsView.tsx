@@ -1,4 +1,4 @@
-import Box from "@mui/material/Box";
+import Box from '@mui/material/Box';
 
 export function SettingsView() {
     return (
@@ -8,10 +8,10 @@ export function SettingsView() {
                 height: '100%',
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: 'center',
+                alignItems: 'center'
             }}
         >
             <h3>Settings</h3>
         </Box>
-    )
+    );
 }

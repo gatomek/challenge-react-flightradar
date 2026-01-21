@@ -10,4 +10,4 @@ export type Airplane = {
     heading?: number;
     info: string;
     selected: boolean;
-}
+};

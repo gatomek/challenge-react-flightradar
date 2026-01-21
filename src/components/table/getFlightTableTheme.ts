@@ -8,8 +8,8 @@ const theme: Theme = createTheme({
                     fontSize: '0.7rem',
                     padding: '0px',
                     margin: '0px'
-                },
-            },
+                }
+            }
         },
         MuiMenuItem: {
             styleOverrides: {
@@ -17,10 +17,10 @@ const theme: Theme = createTheme({
                     fontSize: '0.8rem',
                     padding: '1px',
                     margin: '1px'
-                },
-            },
-        },
-    },
+                }
+            }
+        }
+    }
 });
 
 export function getFlightTableTheme() {
