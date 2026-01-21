@@ -10,6 +10,24 @@ import {makeAircraftCollection} from "./makeAircraftCollection.ts";
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks.ts";
 import {resetIcao, setIcao} from "../../app/aircraft-slice.ts";
 
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+import 'leaflet/dist/leaflet.css';
+
+const DefaultIcon = L.icon({
+    iconUrl: icon,
+    shadowUrl: iconShadow,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    shadowSize: [41, 41],
+    shadowAnchor: [13, 41],
+    popupAnchor: [1, -34],
+    tooltipAnchor: [14, -21]
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
+
 const DEFAULT_POSITION: LatLngTuple = [52.162, 20.96];
 
 type ShowGeoJsonObjectProps = {
