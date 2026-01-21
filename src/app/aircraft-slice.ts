@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice} from '@reduxjs/toolkit';
 
 interface AircraftState {
     icao: string;
@@ -6,7 +6,7 @@ interface AircraftState {
 
 const initialState: AircraftState = {
     icao: ''
-}
+};
 
 const aircraftSlice = createSlice({
     name: 'aircraft',
@@ -19,7 +19,7 @@ const aircraftSlice = createSlice({
             state.icao = '';
         }
     }
-})
+});
 
 export const {setIcao, resetIcao} = aircraftSlice.actions;
 export default aircraftSlice.reducer;

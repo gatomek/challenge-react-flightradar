@@ -1,4 +1,4 @@
-import Box from "@mui/material/Box";
+import Box from '@mui/material/Box';
 
 export function ProfileView() {
     return (
@@ -8,10 +8,10 @@ export function ProfileView() {
                 height: '100%',
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: 'center',
+                alignItems: 'center'
             }}
         >
             <h3>Profile</h3>
         </Box>
-    )
+    );
 }

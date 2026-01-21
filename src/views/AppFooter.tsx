@@ -11,16 +11,15 @@ export function AppFooter() {
                 top: 'auto'
             }}
         >
-            <Toolbar variant={"dense"}
-                     sx={{
-                         display: 'flex',
-                         justifyContent: 'center'
-                     }}
+            <Toolbar
+                variant={'dense'}
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}
             >
-                <Typography noWrap>
-                    ©2025 FlightRadar
-                </Typography>
+                <Typography noWrap>©2025 FlightRadar</Typography>
             </Toolbar>
         </AppBar>
-    )
+    );
 }
