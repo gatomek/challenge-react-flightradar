@@ -2,9 +2,11 @@ import {MainContent} from '../views/MainContent';
 import {AircraftsView} from '../views/AircraftsView';
 import {SettingsView} from '../views/SettingsView';
 import {ProfileView} from '../views/ProfileView';
-import {Navigate} from 'react-router-dom';
+import {createBrowserRouter, Navigate} from 'react-router-dom';
+import {FileNotFoundView} from '../views/FileNotFoundView.tsx';
+import {appConfig, PageNotFoundProcessing} from '../AppConfig.ts';
 
-export const routerConfig = [
+export const browserRouter = createBrowserRouter([
     {
         path: '',
         element: <MainContent />,
@@ -24,7 +26,16 @@ export const routerConfig = [
             {
                 path: '/profile',
                 element: <ProfileView />
+            },
+            {
+                path: '*',
+                element:
+                    appConfig.pageNotFoundProcessing === PageNotFoundProcessing.Info ? (
+                        <FileNotFoundView />
+                    ) : (
+                        <Navigate to="/" />
+                    )
             }
         ]
     }
-];
+]);
