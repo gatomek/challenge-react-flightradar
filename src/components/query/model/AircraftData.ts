@@ -1,6 +1,6 @@
 import type {Aircraft} from './Aircraft.ts';
 
-export type AircraftData = {
+export interface AircraftData {
     ac: Aircraft[];
     total: number;
-};
+}

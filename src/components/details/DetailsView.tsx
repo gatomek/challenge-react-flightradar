@@ -14,7 +14,7 @@ export function DetailsView() {
             return;
         }
 
-        let cancel: boolean = false;
+        let cancel = false;
 
         fetch('https://api.planespotters.net/pub/photos/hex/' + icao)
             .then((res) => {

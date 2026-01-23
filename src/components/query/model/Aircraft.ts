@@ -1,4 +1,4 @@
-export type Aircraft = {
+export interface Aircraft {
     hex: string;
     flight?: string;
     t: string;
@@ -9,4 +9,4 @@ export type Aircraft = {
     alt_baro: number | string;
     heading?: number;
     dbFlags?: number;
-};
+}

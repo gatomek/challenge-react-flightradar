@@ -30,10 +30,10 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 const DEFAULT_POSITION: LatLngTuple = [52.162, 20.96];
 
-type ShowGeoJsonObjectProps = {
+interface ShowGeoJsonObjectProps {
     geoJsonCollection: FeatureCollection;
     pointToLayer: ((geoJsonPoint: Feature, latLng: LatLng) => Layer) | undefined;
-};
+}
 
 function ShowGeoJsonObject(props: Readonly<ShowGeoJsonObjectProps>) {
     return (
@@ -45,9 +45,9 @@ function TileLayerSetter(props: Readonly<CustomTileLayer>) {
     return <TileLayer url={props.url} attribution={props.attribution} detectRetina={false} />;
 }
 
-type MapClickHandlerProps = {
+interface MapClickHandlerProps {
     onMapClick: () => void;
-};
+}
 
 const MapClickHandler = (props: Readonly<MapClickHandlerProps>) => {
     useMapEvent('click', props.onMapClick); // Attach a click event to the map

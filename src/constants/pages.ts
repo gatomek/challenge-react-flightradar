@@ -1,7 +1,7 @@
-export type PageConfig = {
+export interface PageConfig {
     label: string;
     path: string;
-};
+}
 
 export const PAGES: PageConfig[] = [
     {label: 'Aircrafts', path: '/aircrafts'},

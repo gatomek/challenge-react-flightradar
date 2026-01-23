@@ -5,9 +5,9 @@ export const PageNotFoundProcessing = {
 
 export type PageNotFoundProcessing = (typeof PageNotFoundProcessing)[keyof typeof PageNotFoundProcessing];
 
-export type AppConfig = {
+export interface AppConfig {
     pageNotFoundProcessing: PageNotFoundProcessing;
-};
+}
 
 export const appConfig: AppConfig = {
     pageNotFoundProcessing: PageNotFoundProcessing.Info
