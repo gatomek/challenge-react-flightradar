@@ -12,21 +12,24 @@ import {browserRouter} from './app/browserRouter';
 
 const queryClient = new QueryClient();
 
-createRoot(document.getElementById('root')!).render(
-    <ReactKeycloakProvider
-        authClient={keycloak}
-        initOptions={{
-            onLoad: 'login-required',
-            checkLoginIframe: false
-        }}
-        LoadingComponent={<></>}
-    >
-        <StrictMode>
-            <Provider store={store}>
-                <QueryClientProvider client={queryClient}>
-                    <RouterProvider router={browserRouter} />
-                </QueryClientProvider>
-            </Provider>
-        </StrictMode>
-    </ReactKeycloakProvider>
-);
+const root = document.getElementById('root');
+if (root) {
+    createRoot(root).render(
+        <ReactKeycloakProvider
+            authClient={keycloak}
+            initOptions={{
+                onLoad: 'login-required',
+                checkLoginIframe: false
+            }}
+            LoadingComponent={<></>}
+        >
+            <StrictMode>
+                <Provider store={store}>
+                    <QueryClientProvider client={queryClient}>
+                        <RouterProvider router={browserRouter} />
+                    </QueryClientProvider>
+                </Provider>
+            </StrictMode>
+        </ReactKeycloakProvider>
+    );
+}

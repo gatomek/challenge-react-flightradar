@@ -1,4 +1,4 @@
-export type Airplane = {
+export interface Airplane {
     hex: string;
     flight?: string;
     type: string;
@@ -10,4 +10,4 @@ export type Airplane = {
     heading?: number;
     info: string;
     selected: boolean;
-};
+}

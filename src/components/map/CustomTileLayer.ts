@@ -1,4 +1,4 @@
-export type CustomTileLayer = {
+export interface CustomTileLayer {
     url: string;
     attribution: string;
-};
+}
