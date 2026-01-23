@@ -70,7 +70,7 @@ npm outdated
 npm run dev -- --force
 ```
 
-# Konfiguracja eslint
+# ESLINT Configuration
 
 ```
 npm install --save-dev eslint @eslint/js typescript typescript-eslint
