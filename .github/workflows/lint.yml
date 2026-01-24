@@ -1,7 +1,7 @@
-name: Node.js CI
+name: Linter CI
 on: [ push ]
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -11,5 +11,5 @@ jobs:
           node-version: '22.x'
       - name: Clean install dependencies
         run: npm ci
-      - name: Build solution
-        run: npm run build
+      - name: Run linter
+        run: npm run lint
