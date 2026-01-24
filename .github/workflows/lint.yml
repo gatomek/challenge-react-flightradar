@@ -1,8 +1,5 @@
-name: Node.js CI
-on:
-  push:
-    branches:
-      - main
+name: Linter CI
+on: [ push ]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,5 +11,5 @@ jobs:
           node-version: '22.x'
       - name: Clean install dependencies
         run: npm ci
-      - name: Build solution
-        run: npm run build
+      - name: Run linter
+        run: npm run lint
