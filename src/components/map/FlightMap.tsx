@@ -15,6 +15,62 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 import 'leaflet/dist/leaflet.css';
 
+import flightSvg from '../../assets/flight.svg';
+import groundSvg from '../../assets/ground.svg';
+import towerSvg from '../../assets/tower.svg';
+
+import selectedFlightSvg from '../../assets/flight.sel.svg';
+import selectedGroundSvg from '../../assets/ground.sel.svg';
+import selectedTowerSvg from '../../assets/tower.sel.svg';
+
+const flightIcon = L.icon({
+    iconUrl: flightSvg,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
+    tooltipAnchor: [0, -15],
+    className: 'custom-icon'
+});
+
+const selectedFlightIcon = L.icon({
+    iconUrl: selectedFlightSvg,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
+    tooltipAnchor: [0, -15],
+    className: 'custom-icon'
+});
+
+const groundIcon = L.icon({
+    iconUrl: groundSvg,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
+    tooltipAnchor: [0, -15],
+    className: 'custom-icon'
+});
+
+const selectedGroundIcon = L.icon({
+    iconUrl: selectedGroundSvg,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
+    tooltipAnchor: [0, -15],
+    className: 'custom-icon'
+});
+
+const towerIcon = L.icon({
+    iconUrl: towerSvg,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
+    tooltipAnchor: [0, -15],
+    className: 'custom-icon'
+});
+
+const selectedTowerIcon = L.icon({
+    iconUrl: selectedTowerSvg,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
+    tooltipAnchor: [0, -15],
+    className: 'custom-icon'
+});
+
 const DefaultIcon = L.icon({
     iconUrl: icon,
     shadowUrl: iconShadow,
@@ -54,15 +110,15 @@ const MapClickHandler = (props: Readonly<MapClickHandlerProps>) => {
     return null;
 };
 
-const colorMarkerToColor = (colorMarker: undefined | string) => {
+const paramsToIcon = (colorMarker: undefined | string, marker: boolean) => {
     if (colorMarker === 'TWR') {
-        return 'brown';
+        return marker ? selectedTowerIcon : towerIcon;
     }
     if (colorMarker === 'GND') {
-        return 'darkgreen';
+        return marker ? selectedGroundIcon : groundIcon;
     }
 
-    return 'blue';
+    return marker ? selectedFlightIcon : flightIcon;
 };
 
 export function FlightMap() {
@@ -85,9 +141,9 @@ export function FlightMap() {
 
     const aircraftPointToLayer = useCallback(
         (feature: Feature, latLng: LatLng) => {
-            const color = colorMarkerToColor(feature.properties?.colorMarker);
-            const radius = feature.properties?.marker === true ? 10 : 5;
-            return L.circleMarker(latLng, {color: color, radius, weight: 1})
+            return L.marker(latLng, {
+                icon: paramsToIcon(feature.properties?.colorMarker, feature.properties?.marker)
+            })
                 .on('click', (evt: LeafletMouseEvent): void => onMarkerClickHandler(evt, feature))
                 .bindTooltip(feature.properties?.desc, {permanent: false, direction: 'top', opacity: 0.75});
         },
