@@ -14,6 +14,7 @@ import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 import 'leaflet/dist/leaflet.css';
+import 'leaflet-rotate';
 
 import flightSvg from '../../assets/flight.svg';
 import groundSvg from '../../assets/ground.svg';
@@ -139,16 +140,16 @@ export function FlightMap() {
         [dispatch]
     );
 
-    const aircraftPointToLayer = useCallback(
-        (feature: Feature, latLng: LatLng) => {
-            return L.marker(latLng, {
-                icon: paramsToIcon(feature.properties?.colorMarker, feature.properties?.marker)
-            })
-                .on('click', (evt: LeafletMouseEvent): void => onMarkerClickHandler(evt, feature))
-                .bindTooltip(feature.properties?.desc, {permanent: false, direction: 'top', opacity: 0.75});
-        },
-        [onMarkerClickHandler]
-    );
+    const degreeToRadians = (degree: number): number => (degree * Math.PI) / 180;
+
+    const aircraftPointToLayer = (feature: Feature, latLng: LatLng) => {
+        return L.marker(latLng, {
+            icon: paramsToIcon(feature.properties?.colorMarker, feature.properties?.marker),
+            rotation: degreeToRadians(feature.properties?.heading)
+        })
+            .on('click', (evt: LeafletMouseEvent): void => onMarkerClickHandler(evt, feature))
+            .bindTooltip(feature.properties?.desc, {permanent: false, direction: 'top', opacity: 0.75});
+    };
 
     return (
         <MapContainer
