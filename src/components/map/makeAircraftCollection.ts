@@ -32,7 +32,7 @@ export function makeAircraftCollection(data: AircraftData | undefined, icao: str
                 coordinates: [lon, lat]
             },
             properties: {
-                desc: `ICAO: ${hex}'<br/>ALT: ${alt_baro}<br/>TYPE: ${t}` + (ac.desc ? ` | ${desc}` : ''),
+                desc: `ICAO: ${hex}<br/>ALT: ${alt_baro}<br/>TYPE: ${t}` + (ac.desc ? ` | ${desc}` : ''),
                 type: t,
                 icao: hex,
                 marker: icao !== '' && icao === hex,
