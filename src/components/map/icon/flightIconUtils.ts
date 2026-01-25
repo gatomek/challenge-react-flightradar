@@ -1,9 +1,9 @@
 import L from 'leaflet';
 
-import flightHeadSvg from '../../assets/flight.head.svg';
-import flightHeadSelSvg from '../../assets/flight.head.sel.svg';
-import flightSvg from '../../assets/flight.svg';
-import flightSelSvg from '../../assets/flight.sel.svg';
+import flightHeadSvg from '../../../assets/flight.head.svg';
+import flightHeadSelSvg from '../../../assets/flight.head.sel.svg';
+import flightSvg from '../../../assets/flight.svg';
+import flightSelSvg from '../../../assets/flight.sel.svg';
 
 const flightHeadIcon = L.icon({
     iconUrl: flightHeadSvg,

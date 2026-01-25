@@ -1,7 +1,7 @@
-import groundHeadSvg from '../../assets/ground.head.svg';
-import groundHeadSelSvg from '../../assets/ground.head.sel.svg';
-import groundSvg from '../../assets/ground.svg';
-import groundSelSvg from '../../assets/ground.sel.svg';
+import groundHeadSvg from '../../../assets/ground.head.svg';
+import groundHeadSelSvg from '../../../assets/ground.head.sel.svg';
+import groundSvg from '../../../assets/ground.svg';
+import groundSelSvg from '../../../assets/ground.sel.svg';
 import L from 'leaflet';
 
 export const groundHeadIcon = L.icon({

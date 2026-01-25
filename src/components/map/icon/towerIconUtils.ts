@@ -1,5 +1,5 @@
-import towerSvg from '../../assets/tower.svg';
-import towerSelSvg from '../../assets/tower.sel.svg';
+import towerSvg from '../../../assets/tower.svg';
+import towerSelSvg from '../../../assets/tower.sel.svg';
 import L from 'leaflet';
 
 const towerIcon = L.icon({
