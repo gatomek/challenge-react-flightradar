@@ -1,10 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit';
 
 import aircraftReducer from './aircraft-slice';
+import radarReducer from './radar-slice';
 
 export const store = configureStore({
     reducer: {
-        aircraft: aircraftReducer
+        aircraft: aircraftReducer,
+        radar: radarReducer
     }
 });
 

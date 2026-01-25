@@ -57,7 +57,8 @@ const paramsToIcon = (colorMarker: undefined | string, marker: undefined | boole
 
 export function FlightMap() {
     const [tileLayer] = useState<CustomTileLayer>(stadiaMapsTileLayer);
-    const {data} = useLiveAirplanesApi();
+    const location: string = useAppSelector((state) => state.radar.location);
+    const {data} = useLiveAirplanesApi({location});
     const icao: string = useAppSelector((state) => state.aircraft.icao);
     const dispatch = useAppDispatch();
 

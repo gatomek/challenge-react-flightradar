@@ -13,11 +13,21 @@ const normalizeAndApplyErrata = (data: AircraftData): AircraftData => {
     return {total: data.total, ac: corrected};
 };
 
-export function useLiveAirplanesApi() {
+interface ApiProps {
+    location: string;
+}
+
+export function useLiveAirplanesApi(apiProps: ApiProps) {
+
+    const url = apiProps.location === 'warsaw' ?
+        'https://api.airplanes.live/v2/point/52.162/20.960/250'
+        :
+        'https://113-30-190-16.cloud-xip.com:12000/logs';
+
     const {data, isLoading, isFetching, isError, refetch} = useQuery({
-        queryKey: ['api.airplanes.live'],
+        queryKey: ['liveAirplanesLogs'],
         queryFn: async (): Promise<AircraftData> => {
-            const res = await fetch('https://api.airplanes.live/v2/point/52.162/20.960/250');
+            const res = await fetch( url);
             if (!res.ok) {
                 throw new Error(`Failed to fetch flight data: ${res.status} ${res.statusText}`);
             }

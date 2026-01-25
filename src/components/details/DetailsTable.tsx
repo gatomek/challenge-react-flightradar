@@ -9,7 +9,8 @@ export interface AircraftParam {
 }
 
 export const DetailsTable = () => {
-    const {data: liveApiData} = useLiveAirplanesApi();
+    const location: string = useAppSelector((state) => state.radar.location);
+    const {data: liveApiData} = useLiveAirplanesApi({location});
     const icao: string = useAppSelector((state): string => state.aircraft.icao);
     const liveData = liveApiData?.ac.find((ac) => ac.hex === icao);
 
