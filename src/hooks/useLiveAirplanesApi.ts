@@ -3,7 +3,7 @@ import type {AircraftData} from '../components/query/model/AircraftData';
 import {errata} from '../data/errata.ts';
 import type {Aircraft} from '../components/query/model/Aircraft.ts';
 
-const applyErrata = (data: AircraftData): AircraftData => {
+const normalizeAndApplyErrata = (data: AircraftData): AircraftData => {
     const corrected = data.ac.map((ac) => {
         const hex: string = ac.hex.toUpperCase();
         const correction: Partial<Aircraft> = errata[hex];
@@ -30,7 +30,7 @@ export function useLiveAirplanesApi() {
         refetchIntervalInBackground: true,
         refetchOnWindowFocus: false,
         refetchOnReconnect: true,
-        select: (data: AircraftData): AircraftData => applyErrata(data)
+        select: (data: AircraftData): AircraftData => normalizeAndApplyErrata(data)
     });
 
     return {

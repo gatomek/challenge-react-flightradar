@@ -7,6 +7,10 @@ export interface Aircraft {
     lat: number;
     lon: number;
     alt_baro: number | string;
-    heading?: number;
+
+    mag_heading?: number;
+    true_heading?: number;
+    track?: number;
+
     dbFlags?: number;
 }

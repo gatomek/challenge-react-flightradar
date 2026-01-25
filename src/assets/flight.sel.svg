@@ -1,0 +1,12 @@
+<svg height="100"
+     width="100"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="-15 -15 30 30"
+     stroke="blue"
+     fill="blue"
+>
+    <g stroke-width="1">
+        <circle cx="0" cy="0" r="15" stroke="none" opacity="0.25"/>
+        <circle cx="0" cy="0" r="1"/>
+    </g>
+</svg>

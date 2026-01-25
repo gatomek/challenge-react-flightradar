@@ -9,24 +9,11 @@ import {GeoJSON, MapContainer, Marker, TileLayer, useMapEvent} from 'react-leafl
 import {makeAircraftCollection} from './makeAircraftCollection.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks.ts';
 import {resetIcao, setIcao} from '../../app/aircraft-slice.ts';
-
-import icon from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-
 import 'leaflet/dist/leaflet.css';
-
-const DefaultIcon = L.icon({
-    iconUrl: icon,
-    shadowUrl: iconShadow,
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    shadowSize: [41, 41],
-    shadowAnchor: [13, 41],
-    popupAnchor: [1, -34],
-    tooltipAnchor: [14, -21]
-});
-
-L.Marker.prototype.options.icon = DefaultIcon;
+import 'leaflet-rotate';
+import {paramsToFlightIcon} from './icon/flightIconUtils.ts';
+import {paramsToGroundIcon} from './icon/groundIconUtils.ts';
+import {paramsToTowerIcon} from './icon/towerIconUtils.ts';
 
 const DEFAULT_POSITION: LatLngTuple = [52.162, 20.96];
 
@@ -54,15 +41,15 @@ const MapClickHandler = (props: Readonly<MapClickHandlerProps>) => {
     return null;
 };
 
-const colorMarkerToColor = (colorMarker: undefined | string) => {
+const paramsToIcon = (colorMarker: undefined | string, marker: undefined | boolean, heading: undefined | number) => {
     if (colorMarker === 'TWR') {
-        return 'brown';
+        return paramsToTowerIcon(marker);
     }
     if (colorMarker === 'GND') {
-        return 'darkgreen';
+        return paramsToGroundIcon(marker, heading);
     }
 
-    return 'blue';
+    return paramsToFlightIcon(marker, heading);
 };
 
 export function FlightMap() {
@@ -83,16 +70,17 @@ export function FlightMap() {
         [dispatch]
     );
 
-    const aircraftPointToLayer = useCallback(
-        (feature: Feature, latLng: LatLng) => {
-            const color = colorMarkerToColor(feature.properties?.colorMarker);
-            const radius = feature.properties?.marker === true ? 10 : 5;
-            return L.circleMarker(latLng, {color: color, radius, weight: 1})
-                .on('click', (evt: LeafletMouseEvent): void => onMarkerClickHandler(evt, feature))
-                .bindTooltip(feature.properties?.desc, {permanent: false, direction: 'top', opacity: 0.75});
-        },
-        [onMarkerClickHandler]
-    );
+    const degreeToRadians = (degree: number): number => (degree * Math.PI) / 180;
+
+    const aircraftPointToLayer = (feature: Feature, latLng: LatLng) => {
+        const props = feature.properties;
+        return L.marker(latLng, {
+            icon: paramsToIcon(props?.colorMarker, props?.marker, props?.heading),
+            ...(props?.heading && {rotation: degreeToRadians(props.heading)})
+        })
+            .on('click', (evt: LeafletMouseEvent): void => onMarkerClickHandler(evt, feature))
+            .bindTooltip(props?.desc, {permanent: false, direction: 'top', opacity: 0.75});
+    };
 
     return (
         <MapContainer

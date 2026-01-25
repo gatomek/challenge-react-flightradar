@@ -15,6 +15,9 @@
 # ADS-B Links
 
 - https://airplanes.live/rest-api-adsb-data-field-descriptions/
+- https://www.adsbexchange.com/version-2-api-wip/
+- https://www.adsbexchange.com/emitter-category-ads-b-do-260b-2-2-3-2-5-2/
+- https://mode-s.org/1090mhz/content/ads-b/2-identification.html
 - https://api.airplanes.live/v2/point/51.00/21.00/100
 - https://globe.adsbexchange.com/?icao=4d03cb
 - https://www.jetphotos.com/photo/keyword/LX-N90453
