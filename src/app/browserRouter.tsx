@@ -2,7 +2,7 @@ import {MainContent} from '../views/MainContent';
 import {AircraftsView} from '../views/AircraftsView';
 import {SettingsView} from '../views/SettingsView';
 import {ProfileView} from '../views/ProfileView';
-import {createBrowserRouter, Navigate} from 'react-router-dom';
+import {createBrowserRouter, Navigate} from 'react-router';
 import {FileNotFoundView} from '../views/FileNotFoundView.tsx';
 import {appConfig, PageNotFoundProcessing} from '../AppConfig.ts';
 
