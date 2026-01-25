@@ -111,7 +111,7 @@ const MapClickHandler = (props: Readonly<MapClickHandlerProps>) => {
     return null;
 };
 
-const paramsToIcon = (colorMarker: undefined | string, marker: boolean) => {
+const paramsToIcon = (colorMarker: undefined | string, marker: undefined | boolean) => {
     if (colorMarker === 'TWR') {
         return marker ? selectedTowerIcon : towerIcon;
     }
