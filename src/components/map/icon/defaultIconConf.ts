@@ -3,7 +3,7 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 import L from 'leaflet';
 
-export const DefaultIcon = L.icon({
+const DefaultIcon = L.icon({
     iconUrl: icon,
     shadowUrl: iconShadow,
     iconSize: [25, 41],
@@ -14,4 +14,6 @@ export const DefaultIcon = L.icon({
     tooltipAnchor: [14, -21]
 });
 
-L.Marker.prototype.options.icon = DefaultIcon;
+export function defaultIconConfig() {
+    L.Marker.prototype.options.icon = DefaultIcon;
+}

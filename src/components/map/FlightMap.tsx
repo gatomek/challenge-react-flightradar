@@ -14,6 +14,9 @@ import 'leaflet-rotate';
 import {paramsToFlightIcon} from './icon/flightIconUtils.ts';
 import {paramsToGroundIcon} from './icon/groundIconUtils.ts';
 import {paramsToTowerIcon} from './icon/towerIconUtils.ts';
+import {defaultIconConfig} from "./icon/defaultIconConf.ts";
+
+defaultIconConfig();
 
 const DEFAULT_POSITION: LatLngTuple = [52.162, 20.96];
 
