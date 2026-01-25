@@ -7,6 +7,6 @@
 >
     <g stroke-width="1">
         <circle cx="0" cy="0" r="8" stroke="none" opacity="0.25"/>
-        <circle cx="0" cy="0" r="1"/>
+        <polygon points="-5,4 0,-6 5,4" opacity="0.5"/>
     </g>
 </svg>
