@@ -111,7 +111,7 @@ const MapClickHandler = (props: Readonly<MapClickHandlerProps>) => {
     return null;
 };
 
-const paramsToIcon = (colorMarker: undefined | string, marker: undefined | boolean) => {
+const paramsToIcon = (colorMarker: undefined | string, marker: undefined | boolean, heading: undefined | number) => {
     if (colorMarker === 'TWR') {
         return marker ? selectedTowerIcon : towerIcon;
     }
@@ -143,12 +143,13 @@ export function FlightMap() {
     const degreeToRadians = (degree: number): number => (degree * Math.PI) / 180;
 
     const aircraftPointToLayer = (feature: Feature, latLng: LatLng) => {
+        const props = feature.properties;
         return L.marker(latLng, {
-            icon: paramsToIcon(feature.properties?.colorMarker, feature.properties?.marker),
-            rotation: degreeToRadians(feature.properties?.heading)
+            icon: paramsToIcon(props?.colorMarker, props?.marker, props?.heading),
+            ...(props?.heading && {rotation: degreeToRadians(props.heading)})
         })
             .on('click', (evt: LeafletMouseEvent): void => onMarkerClickHandler(evt, feature))
-            .bindTooltip(feature.properties?.desc, {permanent: false, direction: 'top', opacity: 0.75});
+            .bindTooltip(props?.desc, {permanent: false, direction: 'top', opacity: 0.75});
     };
 
     return (
