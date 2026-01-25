@@ -9,81 +9,11 @@ import {GeoJSON, MapContainer, Marker, TileLayer, useMapEvent} from 'react-leafl
 import {makeAircraftCollection} from './makeAircraftCollection.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks.ts';
 import {resetIcao, setIcao} from '../../app/aircraft-slice.ts';
-
-import icon from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-rotate';
-
-import flightSvg from '../../assets/flight.svg';
-import groundSvg from '../../assets/ground.svg';
-import towerSvg from '../../assets/tower.svg';
-
-import selectedFlightSvg from '../../assets/flight.sel.svg';
-import selectedGroundSvg from '../../assets/ground.sel.svg';
-import selectedTowerSvg from '../../assets/tower.sel.svg';
-
-const flightIcon = L.icon({
-    iconUrl: flightSvg,
-    iconSize: [30, 30],
-    iconAnchor: [15, 15],
-    tooltipAnchor: [0, -15],
-    className: 'custom-icon'
-});
-
-const selectedFlightIcon = L.icon({
-    iconUrl: selectedFlightSvg,
-    iconSize: [30, 30],
-    iconAnchor: [15, 15],
-    tooltipAnchor: [0, -15],
-    className: 'custom-icon'
-});
-
-const groundIcon = L.icon({
-    iconUrl: groundSvg,
-    iconSize: [30, 30],
-    iconAnchor: [15, 15],
-    tooltipAnchor: [0, -15],
-    className: 'custom-icon'
-});
-
-const selectedGroundIcon = L.icon({
-    iconUrl: selectedGroundSvg,
-    iconSize: [30, 30],
-    iconAnchor: [15, 15],
-    tooltipAnchor: [0, -15],
-    className: 'custom-icon'
-});
-
-const towerIcon = L.icon({
-    iconUrl: towerSvg,
-    iconSize: [30, 30],
-    iconAnchor: [15, 15],
-    tooltipAnchor: [0, -15],
-    className: 'custom-icon'
-});
-
-const selectedTowerIcon = L.icon({
-    iconUrl: selectedTowerSvg,
-    iconSize: [30, 30],
-    iconAnchor: [15, 15],
-    tooltipAnchor: [0, -15],
-    className: 'custom-icon'
-});
-
-const DefaultIcon = L.icon({
-    iconUrl: icon,
-    shadowUrl: iconShadow,
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    shadowSize: [41, 41],
-    shadowAnchor: [13, 41],
-    popupAnchor: [1, -34],
-    tooltipAnchor: [14, -21]
-});
-
-L.Marker.prototype.options.icon = DefaultIcon;
+import {paramsToFlightIcon} from './icon/flightIconUtils.ts';
+import {paramsToGroundIcon} from './icon/groundIconUtils.ts';
+import {paramsToTowerIcon} from './icon/towerIconUtils.ts';
 
 const DEFAULT_POSITION: LatLngTuple = [52.162, 20.96];
 
@@ -113,13 +43,13 @@ const MapClickHandler = (props: Readonly<MapClickHandlerProps>) => {
 
 const paramsToIcon = (colorMarker: undefined | string, marker: undefined | boolean, heading: undefined | number) => {
     if (colorMarker === 'TWR') {
-        return marker ? selectedTowerIcon : towerIcon;
+        return paramsToTowerIcon(marker);
     }
     if (colorMarker === 'GND') {
-        return marker ? selectedGroundIcon : groundIcon;
+        return paramsToGroundIcon(marker, heading);
     }
 
-    return marker ? selectedFlightIcon : flightIcon;
+    return paramsToFlightIcon(marker, heading);
 };
 
 export function FlightMap() {
