@@ -28,8 +28,9 @@ export function useLiveAirplanesApi() {
         retry: 3,
         retryDelay: 5_000,
         refetchIntervalInBackground: true,
-        refetchOnWindowFocus: false,
         refetchOnReconnect: true,
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
         select: (data: AircraftData): AircraftData => normalizeAndApplyErrata(data)
     });
 
