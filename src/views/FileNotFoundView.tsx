@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import {Stack} from '@mui/material';
-import {Link, useLocation} from 'react-router-dom';
+import {Link, useLocation} from 'react-router';
 
 export function FileNotFoundView() {
     const location = useLocation();

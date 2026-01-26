@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import {AppToolbar} from './AppToolbar.tsx';
-import {Outlet} from 'react-router-dom';
+import {Outlet} from 'react-router';
 
 export function MainContent() {
     return (
