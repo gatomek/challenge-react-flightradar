@@ -44,60 +44,62 @@ export const DetailsTable = () => {
     );
 
     const data = useMemo(() => {
-        return liveData ? [
-            {
-                param: 'ICAO',
-                value: icao
-            },
-            {
-                param: 'Desc',
-                value: liveData.desc
-            },
-            {
-                param: 'Flight',
-                value: liveData.flight
-            },
-            {
-                param: 'Altitude',
-                value: liveData.alt_baro
-            },
-            {
-                param: 'GPS',
-                value: liveData.lat + " , " + liveData.lon
-            },
-            {
-                param: 'Category',
-                value: liveData.category
-            },
-            {
-                param: 'Type',
-                value: liveData.t
-            },
-            {
-                param: 'Register',
-                value: liveData.r
-            },
-            {
-                param: 'Ground Speed',
-                value: liveData.gs
-            },
-            {
-                param: 'Mach Speed',
-                value: liveData.mach
-            },
-            {
-                param: 'Squawk',
-                value: liveData.squawk
-            },
-            {
-                param: 'Emergency',
-                value: liveData.emergency
-            },
-            {
-                param: 'Nav Modes',
-                value: liveData.nav_modes?.join( ', ')
-            },
-        ] : [] ;
+        return liveData
+            ? [
+                  {
+                      param: 'ICAO',
+                      value: icao
+                  },
+                  {
+                      param: 'Desc',
+                      value: liveData.desc
+                  },
+                  {
+                      param: 'Flight',
+                      value: liveData.flight
+                  },
+                  {
+                      param: 'Altitude',
+                      value: liveData.alt_baro
+                  },
+                  {
+                      param: 'GPS',
+                      value: liveData.lat + ' , ' + liveData.lon
+                  },
+                  {
+                      param: 'Category',
+                      value: liveData.category
+                  },
+                  {
+                      param: 'Type',
+                      value: liveData.t
+                  },
+                  {
+                      param: 'Register',
+                      value: liveData.r
+                  },
+                  {
+                      param: 'Ground Speed',
+                      value: liveData.gs
+                  },
+                  {
+                      param: 'Mach Speed',
+                      value: liveData.mach
+                  },
+                  {
+                      param: 'Squawk',
+                      value: liveData.squawk
+                  },
+                  {
+                      param: 'Emergency',
+                      value: liveData.emergency
+                  },
+                  {
+                      param: 'Nav Modes',
+                      value: liveData.nav_modes?.join(', ')
+                  }
+              ]
+            : [];
     }, [icao, liveData]);
 
     const table = useMaterialReactTable({
