@@ -3,7 +3,7 @@ import {type MRT_ColumnDef, MRT_Table, useMaterialReactTable} from 'material-rea
 import {useLiveAirplanesApi} from '../../hooks/useLiveAirplanesApi.ts';
 import {useAppSelector} from '../../hooks/hooks.ts';
 
-export interface LogDetail {
+export interface AircraftParam {
     param: string;
     value?: string | number;
 }
@@ -13,7 +13,7 @@ export const DetailsTable = () => {
     const icao: string = useAppSelector((state): string => state.aircraft.icao);
     const liveData = liveApiData?.ac.find((ac) => ac.hex === icao);
 
-    const columns = useMemo<MRT_ColumnDef<LogDetail>[]>(
+    const columns = useMemo<MRT_ColumnDef<AircraftParam>[]>(
         () => [
             {
                 accessorKey: 'param',
