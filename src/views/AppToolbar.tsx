@@ -12,7 +12,7 @@ import RadarIcon from '@mui/icons-material/Radar';
 import {useKeycloak} from '@react-keycloak/web';
 import PersonIcon from '@mui/icons-material/Person';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import {NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router';
 import {type PageConfig, PAGES} from '../constants/pages.ts';
 
 export function AppToolbar() {
