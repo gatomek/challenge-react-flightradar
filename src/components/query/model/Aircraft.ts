@@ -13,4 +13,10 @@ export interface Aircraft {
     track?: number;
 
     dbFlags?: number;
+    category?: string;
+    gs?: number;
+    mach?: number;
+    squawk?: string;
+    emergency?: string;
+    nav_modes?: string[];
 }
