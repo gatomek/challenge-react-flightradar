@@ -80,7 +80,7 @@ export function DetailsView() {
                 {image && (
                     <img
                         src={image}
-                        alt={`Aircraft with ICAO code {icao}`}
+                        alt={`Aircraft with ICAO code ${icao}`}
                         style={{
                             objectFit: 'contain',
                             maxWidth: '100%',
