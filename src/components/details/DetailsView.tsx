@@ -1,8 +1,8 @@
 import {useAppSelector} from '../../hooks/hooks.ts';
 import {Stack} from '@mui/material';
-import Typography from '@mui/material/Typography';
 import {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
+import DetailsTable from './DetailsTable.tsx';
 
 export function DetailsView() {
     const icao: string = useAppSelector((state): string => state.aircraft.icao);
@@ -46,32 +46,41 @@ export function DetailsView() {
     }, [icao]);
 
     return (
-        <Stack direction={'row'} gap={'1rem'} sx={{width: '100%', height: '100%', justifyContent: 'space-between'}}>
+        <Stack
+            direction={'row'}
+            gap={'1rem'}
+            sx={{
+                width: '100%',
+                height: '100%',
+                justifyContent: 'space-between',
+                padding: '0px',
+                margin: '0px',
+            }}
+        >
             <Box
                 sx={{
-                    width: '25%',
-                    m: '1rem',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
+                    width: '35%',
+                    m: 'auto',
+                    mt: '0rem',
+                    verticalAlign: 'top',
+                    maxHeight: '430px',
+                    overflow: 'auto',
                 }}
             >
-                {icao && <Typography variant={'h6'}>ICAO {icao}</Typography>}
+                {icao && <DetailsTable/>}
             </Box>
             <Stack
                 sx={{
+                    width: '65%',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    p: '1rem',
-                    borderLeft: 'solid 1px lightgray',
-                    width: '75%'
                 }}
             >
                 {image && (
                     <img
                         src={image}
-                        alt={`Aircraft with ICAO code {icao}`}
+                        alt={`Aircraft with ICAO code ${icao}`}
                         style={{
                             objectFit: 'contain',
                             maxWidth: '100%',
