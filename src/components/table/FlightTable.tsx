@@ -16,7 +16,8 @@ const flightTableTheme = getFlightTableTheme();
 const flightTableColumns = getFlightTableColumns();
 
 export function FlightTable() {
-    const {data, isLoading, isFetching, refetch} = useLiveAirplanesApi();
+    const location: string = useAppSelector((state) => state.radar.location);
+    const {data, isLoading, isFetching, refetch} = useLiveAirplanesApi({location});
     const dispatch = useAppDispatch();
     const icao: string = useAppSelector((state) => state.aircraft.icao);
     const flightData = useMemo<Airplane[]>(() => makeFlightData(data, icao), [data, icao]);
