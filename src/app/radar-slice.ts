@@ -5,7 +5,7 @@ interface RadarState {
 }
 
 const initialState: RadarState = {
-    location: 'warsaw'
+    location: 'poland'
 };
 
 const radarSlice = createSlice({
@@ -16,7 +16,7 @@ const radarSlice = createSlice({
             state.location = action.payload;
         },
         resetRange(state) {
-            state.location = 'warsaw';
+            state.location = 'poland';
         }
     }
 });
