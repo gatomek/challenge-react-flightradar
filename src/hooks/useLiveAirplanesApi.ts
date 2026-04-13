@@ -19,8 +19,8 @@ interface ApiProps {
 
 export function useLiveAirplanesApi(apiProps: ApiProps) {
 
-    const url = apiProps.location === 'warsaw' ?
-        'https://api.airplanes.live/v2/point/52.162/20.960/250'
+    const url = apiProps.location === 'poland' ?
+        'https://api.airplanes.live/v2/point/52/19/250'
         :
         'https://113-30-190-16.cloud-xip.com:12000/logs';
 

@@ -43,7 +43,7 @@ export function SettingsView() {
                             defaultValue={location}
                             render={({field}) => (
                                 <Select {...field} labelId="radar-label" label="Radar">
-                                    <MenuItem value="warsaw">Warsaw</MenuItem>
+                                    <MenuItem value="poland">Poland</MenuItem>
                                     <MenuItem value="europe">Europe</MenuItem>
                                 </Select>
                             )}
