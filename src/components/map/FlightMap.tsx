@@ -46,23 +46,23 @@ const paramsToIcon = (colorMarker: undefined | string, marker: undefined | boole
     return paramsToFlightIcon(marker, heading);
 };
 
-const getClassNameByMarkerCount = (count: number) : string => {
+const getClassNameByMarkerCount = (count: number): string => {
     if (count > 100) {
-        return 'cluster-icon-large';
+        return 'cluster-large';
     }
 
     if (count > 10) {
-        return 'cluster-icon-medium';
+        return 'cluster-medium';
     }
 
-    return 'cluster-icon-small';
-}
+    return 'cluster-small';
+};
 
 const createClusterCustomIcon = (cluster: L.MarkerCluster) => {
     const count = cluster.getChildCount();
     return L.divIcon({
         html: `<span>${count}</span>`,
-        className: getClassNameByMarkerCount(count),
+        className: `cluster-icon ${getClassNameByMarkerCount(count)}`,
         iconSize: L.point(33, 33, true)
     });
 };
@@ -86,7 +86,7 @@ export function FlightMap() {
         [dispatch]
     );
 
-    const featureToMarker = (f: Feature<Point>) =>
+    const featureToMarker = (f: Feature<Point>) => (
         <Marker
             key={f.properties?.icao}
             title={f.properties?.icao}
@@ -100,7 +100,8 @@ export function FlightMap() {
             }}
         >
             <Tooltip direction={'top'} opacity={0.75} content={f.properties?.desc} />
-        </Marker>;
+        </Marker>
+    );
 
     const markerAircrafts: Feature<Point>[] = [];
     const otherAircrafts: Feature<Point>[] = [];
@@ -120,7 +121,6 @@ export function FlightMap() {
             scrollWheelZoom={true}
             doubleClickZoom={false}
         >
-            {markerAircrafts.map((f) => featureToMarker(f))}
             <TileLayerSetter url={tileLayer.url} attribution={tileLayer.attribution} />
             <MapClickHandler onMapClick={onMapClickHandler} />
             <MarkerClusterGroup
@@ -138,6 +138,7 @@ export function FlightMap() {
             >
                 {otherAircrafts.map((f) => featureToMarker(f))}
             </MarkerClusterGroup>
+            {markerAircrafts.map((f) => featureToMarker(f))}
         </MapContainer>
     );
 }
