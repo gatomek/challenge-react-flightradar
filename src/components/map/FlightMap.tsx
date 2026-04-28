@@ -89,7 +89,7 @@ export function FlightMap() {
     const featureToMarker = (f: Feature<Point>) =>
         <Marker
             key={f.properties?.icao}
-            title={'test'}
+            title={f.properties?.icao}
             position={[f.geometry.coordinates[1], f.geometry.coordinates[0]]}
             icon={paramsToIcon(f.properties?.colorMarker, f.properties?.marker, f.properties?.heading)}
             rotation={degreeToRadians(f.properties?.heading ?? 0)}
