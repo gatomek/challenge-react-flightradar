@@ -18,7 +18,6 @@ import {paramsToFlightIcon} from './icon/flightIconUtils.ts';
 import {paramsToGroundIcon} from './icon/groundIconUtils.ts';
 import {paramsToTowerIcon} from './icon/towerIconUtils.ts';
 import {defaultIconConfig} from './icon/defaultIconConf.ts';
-import "leaflet.markercluster";
 
 defaultIconConfig();
 

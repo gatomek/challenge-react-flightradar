@@ -32,9 +32,7 @@ export function makeAircraftCollection(data: AircraftData | undefined, icao: str
                 icao: hex,
                 marker: icao !== '' && icao === hex,
                 colorMarker: toColorMarker(ac),
-                ...(heading && {heading: heading}),
-                lon,
-                lat
+                ...(heading && {heading: heading})
             }
         };
     });
