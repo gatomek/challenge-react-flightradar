@@ -12,7 +12,16 @@
 - keycloak-js
 - @react-keycloak/web
 
-# ADS-B Links
+## GIS
+
+- https://www.youtube.com/@gissolutions4604/videos
+
+## Leaflet
+
+- https://react-leaflet.js.org/docs/example-external-state/
+- https://akursat.gitbook.io/marker-cluster/api
+
+## ADS-B Links
 
 - https://airplanes.live/rest-api-adsb-data-field-descriptions/
 - https://www.adsbexchange.com/version-2-api-wip/
@@ -25,21 +34,24 @@
 - https://rapidapi.com/adsbx/api/adsbexchange-com1
 - https://www.flightradar24.com/
 
-# Interesting Resources
+## Interesting Resources
 
 - https://en.wikipedia.org/wiki/List_of_aviation,_avionics,_aerospace_and_aeronautical_abbreviations
 - https://blog.katowice-airport.com/identyfikacja-samolotow-2014-07/
 - https://darkaico.medium.com/building-a-secure-authentication-system-with-keycloak-react-and-flask-35aeee04e37a
 
-# Keycloak links
+## Keycloak links
 
 - https://dev.to/anushibin007/keycloak-oauth2-react-js-integration-34bl
 
-# Typescript
+## Typescript
 
 - https://www.typescriptlang.org/docs/handbook/utility-types.html
 
-# Project preparation
+## Tools
+- https://webaim.org/resources/contrastchecker/
+
+## Project preparation
 
 ```
 npm install leaflet
@@ -52,19 +64,19 @@ npm install leaflet-rotate
 npm install -D @types/leaflet-rotate
 ```
 
-# GIT Configuration
+## GIT Configuration
 
 ```
 git config core.ignorecase false
 ```
 
-# TSC version
+## TSC version
 
 ```
 npx tsc --version
 ```
 
-# NPM Toolkit
+## NPM Toolkit
 
 ```
 npm list
@@ -73,7 +85,7 @@ npm outdated
 npm run dev -- --force
 ```
 
-# ESLINT Configuration
+## ESLINT Configuration
 
 ```
 npm install --save-dev eslint @eslint/js typescript typescript-eslint
