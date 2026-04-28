@@ -3,7 +3,6 @@ import {stadiaMapsTileLayer} from './tileLayers.ts';
 import {useCallback, useMemo, useState} from 'react';
 import {useLiveAirplanesApi} from '../../hooks/useLiveAirplanesApi.ts';
 import MarkerClusterGroup from 'react-leaflet-cluster';
-import MarkerCluster from 'react-leaflet-markercluster';
 import type {Feature, Point} from 'geojson';
 import L, {type LatLngTuple, type LeafletMouseEvent} from 'leaflet';
 import {MapContainer, Marker, TileLayer, Tooltip, useMapEvent} from 'react-leaflet';
@@ -17,6 +16,7 @@ import 'leaflet-rotate';
 import {paramsToFlightIcon} from './icon/flightIconUtils.ts';
 import {paramsToGroundIcon} from './icon/groundIconUtils.ts';
 import {paramsToTowerIcon} from './icon/towerIconUtils.ts';
+import 'leaflet.markercluster';
 
 const DEFAULT_POSITION: LatLngTuple = [52.162, 20.96];
 
@@ -58,7 +58,7 @@ const getClassNameByMarkerCount = (count: number) : string => {
     return 'cluster-icon-small';
 }
 
-const createClusterCustomIcon = (cluster: typeof MarkerCluster) => {
+const createClusterCustomIcon = (cluster: L.MarkerCluster) => {
     const count = cluster.getChildCount();
     return L.divIcon({
         html: `<span>${count}</span>`,
@@ -130,8 +130,6 @@ export function FlightMap() {
                 animateAddingMarkers={false}
                 animate={true}
                 removeOutsideVisibleBounds={true}
-                zoomAnimation={true}
-                markerZoomAnimation={true}
                 showCoverageOnHover={false}
                 chunkDelay={300}
                 chunkInterval={300}
