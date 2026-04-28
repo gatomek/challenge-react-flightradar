@@ -1,11 +1,6 @@
-import type {Feature, FeatureCollection, GeoJsonProperties, Point} from 'geojson';
+import type {Feature, GeoJsonProperties, Point} from 'geojson';
 import type {AircraftData} from '../query/model/AircraftData.ts';
 import type {Aircraft} from '../query/model/Aircraft.ts';
-
-const aircraftEmptyCollection: FeatureCollection = {
-    type: 'FeatureCollection',
-    features: []
-};
 
 const toColorMarker = (ac: Aircraft): undefined | 'TWR' | 'GND' => {
     if (ac.t === 'TWR') {
@@ -17,12 +12,12 @@ const toColorMarker = (ac: Aircraft): undefined | 'TWR' | 'GND' => {
     return undefined;
 };
 
-export function makeAircraftCollection(data: AircraftData | undefined, icao: string): FeatureCollection {
+export function makeAircraftCollection(data: AircraftData | undefined, icao: string): Feature<Point>[] {
     if (!data) {
-        return aircraftEmptyCollection;
+        return [];
     }
 
-    const aircraftPoints: Feature<Point>[] = data.ac.map((ac): Feature<Point, GeoJsonProperties> => {
+    return data.ac.map((ac): Feature<Point, GeoJsonProperties> => {
         const {hex, lon, lat, alt_baro, t, desc, mag_heading, true_heading, track} = ac;
         const heading = mag_heading ?? (true_heading ?? track);
         return {
@@ -41,9 +36,4 @@ export function makeAircraftCollection(data: AircraftData | undefined, icao: str
             }
         };
     });
-
-    return {
-        type: 'FeatureCollection',
-        features: aircraftPoints
-    };
 }

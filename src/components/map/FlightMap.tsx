@@ -2,34 +2,25 @@ import type {CustomTileLayer} from './CustomTileLayer.ts';
 import {stadiaMapsTileLayer} from './tileLayers.ts';
 import {useCallback, useMemo, useState} from 'react';
 import {useLiveAirplanesApi} from '../../hooks/useLiveAirplanesApi.ts';
-import hash from 'object-hash';
-import type {Feature, FeatureCollection} from 'geojson';
-import L, {LatLng, type LatLngTuple, Layer, type LeafletMouseEvent} from 'leaflet';
-import {GeoJSON, MapContainer, Marker, TileLayer, useMapEvent} from 'react-leaflet';
+import MarkerClusterGroup from 'react-leaflet-cluster';
+import type {Feature, Point} from 'geojson';
+import L, {type LatLngTuple, type LeafletMouseEvent} from 'leaflet';
+import {MapContainer, Marker, TileLayer, Tooltip, useMapEvent} from 'react-leaflet';
 import {makeAircraftCollection} from './makeAircraftCollection.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks.ts';
 import {resetIcao, setIcao} from '../../app/aircraft-slice.ts';
 import 'leaflet/dist/leaflet.css';
+import 'react-leaflet-cluster/dist/assets/MarkerCluster.css';
+import 'react-leaflet-cluster/dist/assets/MarkerCluster.Default.css';
 import 'leaflet-rotate';
 import {paramsToFlightIcon} from './icon/flightIconUtils.ts';
 import {paramsToGroundIcon} from './icon/groundIconUtils.ts';
 import {paramsToTowerIcon} from './icon/towerIconUtils.ts';
-import {defaultIconConfig} from "./icon/defaultIconConf.ts";
-
-defaultIconConfig();
+import 'leaflet.markercluster';
 
 const DEFAULT_POSITION: LatLngTuple = [52.162, 20.96];
 
-interface ShowGeoJsonObjectProps {
-    geoJsonCollection: FeatureCollection;
-    pointToLayer: ((geoJsonPoint: Feature, latLng: LatLng) => Layer) | undefined;
-}
-
-function ShowGeoJsonObject(props: Readonly<ShowGeoJsonObjectProps>) {
-    return (
-        <GeoJSON key={hash(props.geoJsonCollection)} data={props.geoJsonCollection} pointToLayer={props.pointToLayer} />
-    );
-}
+const degreeToRadians = (degree: number): number => (degree * Math.PI) / 180;
 
 function TileLayerSetter(props: Readonly<CustomTileLayer>) {
     return <TileLayer url={props.url} attribution={props.attribution} detectRetina={false} />;
@@ -55,6 +46,27 @@ const paramsToIcon = (colorMarker: undefined | string, marker: undefined | boole
     return paramsToFlightIcon(marker, heading);
 };
 
+const getClassNameByMarkerCount = (count: number) : string => {
+    if (count > 100) {
+        return 'cluster-icon-large';
+    }
+
+    if (count > 10) {
+        return 'cluster-icon-medium';
+    }
+
+    return 'cluster-icon-small';
+}
+
+const createClusterCustomIcon = (cluster: L.MarkerCluster) => {
+    const count = cluster.getChildCount();
+    return L.divIcon({
+        html: `<span>${count}</span>`,
+        className: getClassNameByMarkerCount(count),
+        iconSize: L.point(33, 33, true)
+    });
+};
+
 export function FlightMap() {
     const [tileLayer] = useState<CustomTileLayer>(stadiaMapsTileLayer);
     const location: string = useAppSelector((state) => state.radar.location);
@@ -62,7 +74,7 @@ export function FlightMap() {
     const icao: string = useAppSelector((state) => state.aircraft.icao);
     const dispatch = useAppDispatch();
 
-    const aircraftCollection: FeatureCollection = useMemo(() => makeAircraftCollection(data, icao), [data, icao]);
+    const aircraftCollection: Feature<Point>[] = useMemo(() => makeAircraftCollection(data, icao), [data, icao]);
 
     const onMapClickHandler = useCallback(() => dispatch(resetIcao()), [dispatch]);
 
@@ -74,30 +86,58 @@ export function FlightMap() {
         [dispatch]
     );
 
-    const degreeToRadians = (degree: number): number => (degree * Math.PI) / 180;
+    const featureToMarker = (f: Feature<Point>) =>
+        <Marker
+            key={f.properties?.icao}
+            title={f.properties?.icao}
+            position={[f.geometry.coordinates[1], f.geometry.coordinates[0]]}
+            icon={paramsToIcon(f.properties?.colorMarker, f.properties?.marker, f.properties?.heading)}
+            rotation={degreeToRadians(f.properties?.heading ?? 0)}
+            eventHandlers={{
+                click: (evt) => {
+                    onMarkerClickHandler(evt, f);
+                }
+            }}
+        >
+            <Tooltip direction={'top'} opacity={0.75} content={f.properties?.desc} />
+        </Marker>;
 
-    const aircraftPointToLayer = (feature: Feature, latLng: LatLng) => {
-        const props = feature.properties;
-        return L.marker(latLng, {
-            icon: paramsToIcon(props?.colorMarker, props?.marker, props?.heading),
-            ...(props?.heading && {rotation: degreeToRadians(props.heading)})
-        })
-            .on('click', (evt: LeafletMouseEvent): void => onMarkerClickHandler(evt, feature))
-            .bindTooltip(props?.desc, {permanent: false, direction: 'top', opacity: 0.75});
-    };
+    const markerAircrafts: Feature<Point>[] = [];
+    const otherAircrafts: Feature<Point>[] = [];
+    for (const f of aircraftCollection) {
+        if (f.properties?.icao === icao) {
+            markerAircrafts.push(f);
+        } else {
+            otherAircrafts.push(f);
+        }
+    }
 
     return (
         <MapContainer
             style={{height: '100%', width: '100%'}}
             center={DEFAULT_POSITION}
-            zoom={9}
+            zoom={10}
             scrollWheelZoom={true}
             doubleClickZoom={false}
         >
+            {markerAircrafts.map((f) => featureToMarker(f))}
             <TileLayerSetter url={tileLayer.url} attribution={tileLayer.attribution} />
-            <ShowGeoJsonObject geoJsonCollection={aircraftCollection} pointToLayer={aircraftPointToLayer} />
-            <Marker position={DEFAULT_POSITION} />
             <MapClickHandler onMapClick={onMapClickHandler} />
+            <MarkerClusterGroup
+                chunkedLoading={true}
+                maxClusterRadius={100}
+                disableClusteringAtZoom={8}
+                animateAddingMarkers={false}
+                animate={true}
+                removeOutsideVisibleBounds={true}
+                showCoverageOnHover={false}
+                chunkDelay={300}
+                chunkInterval={300}
+                iconCreateFunction={createClusterCustomIcon}
+                spiderfyOnMaxZoom={false}
+            >
+                {otherAircrafts.map((f) => featureToMarker(f))}
+            </MarkerClusterGroup>
         </MapContainer>
     );
 }

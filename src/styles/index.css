@@ -10,3 +10,36 @@ body,
 .leaflet-container :focus {
     outline: none; /* Disable the black box */
 }
+
+.cluster-icon-small {
+    background: #ffffff;
+    border: 2px solid blue;
+    border-radius: 50%;
+    color: black;
+    height: 33px;
+    line-height: 37px;
+    text-align: center;
+    width: 33px;
+}
+
+.cluster-icon-medium {
+    background: yellow;
+    border: 4px solid blue;
+    border-radius: 50%;
+    color: black;
+    height: 33px;
+    line-height: 37px;
+    text-align: center;
+    width: 33px;
+}
+
+.cluster-icon-large {
+    background: orange;
+    border: 8px solid blue;
+    border-radius: 50%;
+    color: black;
+    height: 33px;
+    line-height: 37px;
+    text-align: center;
+    width: 33px;
+}
